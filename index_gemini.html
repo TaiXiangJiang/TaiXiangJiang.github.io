@@ -1,0 +1,1748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- ** 关键：确保移动设备响应式布局 ** -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Tai-Xiang Jiang | SWUFE</title>
+  <meta name="keywords" content="Tai-Xiang Jiang, 蒋太翔, SWUFE">
+  <meta name="description" content="Tai-Xiang Jiang's home page">
+  
+  <!-- ** 核心：引入 Tailwind CSS ** -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- 引入 Inter 字体 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="shortcut icon" href="img/1.jpg">
+
+  <!-- ** 自定义样式 ** -->
+  <style>
+    /* 使用 Inter 作为基础字体 */
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      /* 使用更柔和的背景色 */
+      background-color: #f8fafc; /* Tailwind 'slate-50' */
+    }
+
+    /* 玻璃拟态卡片的基础样式 */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(16px) saturate(150%);
+      -webkit-backdrop-filter: blur(16px) saturate(150%);
+      border: 1px solid rgba(226, 232, 240, 0.7); /* slate-200/70 */
+      box-shadow: 0 10px 25px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05); /* shadow-lg-soft */
+    }
+
+    /* BibTeX 面板的显示/隐藏 */
+    .bibtex-panel {
+      display: none;
+    }
+    .bibtex-panel.open {
+      display: block;
+    }
+
+    /* BibTeX 代码块的字体样式 */
+    .bibtex-content {
+      font-family: "SFMono-Regular", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.8rem;
+      line-height: 1.4;
+      white-space: pre-wrap; /* 允许换行 */
+      word-break: break-all;
+    }
+    
+    /* 出版物标题 */
+    .pub-title {
+      font-size: 1.05rem; /* 1.1rem 稍大 */
+      font-weight: 600;
+      color: #0f172a; /* slate-900 */
+    }
+    /* 作者 */
+    .pub-authors {
+      font-size: 0.9rem;
+      color: #475569; /* slate-600 */
+      line-height: 1.4;
+    }
+    /* 刊物/会议 */
+    .pub-venue {
+      font-size: 0.9rem;
+      color: #475569; /* slate-600 */
+      font-style: italic;
+    }
+    /* ESI 高被引徽章 */
+    .badge-highlight {
+      display: inline-block;
+      background-color: #ecfdf5; /* green-50 */
+      color: #065f46; /* green-800 */
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 2px 8px;
+      border-radius: 999px;
+      margin-left: 8px;
+      border: 1px solid #a7f3d0; /* green-200 */
+      vertical-align: middle;
+    }
+  </style>
+</head>
+
+<body class="text-slate-800">
+
+  <!-- ** 页面主容器 ** -->
+  <div class="max-w-7xl mx-auto p-4 md:p-8">
+
+    <!-- ** 顶部个人信息卡片 (替换了旧的 table1) ** -->
+    <header id="top" class="glass-card rounded-2xl p-6 md:p-8">
+      <div class="flex flex-col md:flex-row md:gap-8">
+
+        <!-- 左侧：照片 + 外部链接 -->
+        <div class="md:w-1/3 text-center flex-shrink-0">
+          <div class="profile-photo">
+            <!-- 头像使用圆形 + 阴影 -->
+            <img src="img/1.jpg" alt="Tai-Xiang Jiang" class="w-40 h-40 rounded-full mx-auto shadow-lg border-2 border-white" 
+                 onerror="this.src='https://placehold.co/160x160/e2e8f0/64748b?text=T.J.'" />
+          </div>
+          
+          <!-- 外部链接 (Pills) -->
+          <div class="header-links mt-6 flex flex-col gap-3">
+            <a class="pill-link group" href="https://scholar.google.com.hk/citations?user=nn6Ze0MAAAAJ&hl=en" target="_blank">
+              <span class="icon">??</span>
+              <span>Google Scholar (1000+ citations)</span>
+            </a>
+            <a class="pill-link group" href="https://github.com/TaiXiangJiang" target="_blank">
+              <span class="icon">??</span>
+              <span>GitHub</span>
+            </a>
+            <a class="pill-link group" href="https://www.researchgate.net/profile/Tai-Xiang-Jiang" target="_blank">
+              <span class="icon">??</span>
+              <span>ResearchGate</span>
+            </a>
+          </div>
+          <style>
+            .pill-link {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 0.5rem;
+              padding: 0.6rem 1rem;
+              border-radius: 999px;
+              font-weight: 500;
+              background-color: #f1f5f9; /* slate-100 */
+              color: #334155; /* slate-700 */
+              transition: all 0.2s ease;
+            }
+            .pill-link:hover {
+              background-color: #e2e8f0; /* slate-200 */
+              color: #0f172a; /* slate-900 */
+              transform: translateY(-1px);
+              box-shadow: 0 4px 10px -2px rgb(0 0 0 / 0.05);
+            }
+            .pill-link .icon {
+              transition: transform 0.2s ease;
+            }
+            .pill-link:hover .icon {
+              transform: scale(1.1);
+            }
+          </style>
+        </div>
+
+        <!-- 右侧：主要信息 -->
+        <div class="profile-main flex-grow mt-6 md:mt-0">
+          <div class="name-row">
+            <h1 class="text-4xl font-bold text-slate-900">Tai-Xiang Jiang</h1>
+            <div class="text-2xl text-slate-600 mt-1">蒋太翔</div>
+          </div>
+
+          <div class="title-line text-lg text-slate-700 mt-4 leading-relaxed">
+            Professor, School of Computing and Artificial Intelligence,
+            <a href="https://www.swufe.edu.cn/" target="_blank" class="font-medium text-teal-700 hover:text-teal-600 transition">Southwestern University of Finance and Economics (SWUFE)</a>
+          </div>
+
+          <!-- 联系方式 -->
+          <div class="space-y-2 mt-4 text-slate-700">
+            <div class="contact-line">
+              <b class="font-semibold text-slate-800">Emails</b>:
+              <span class="mono ml-1">taixiangjiang&nbsp;AT&nbsp;gmail&nbsp;DOT&nbsp;com</span>;
+              <span class="mono ml-1">jiangtx&nbsp;AT&nbsp;swufe&nbsp;DOT&nbsp;edu&nbsp;DOT&nbsp;cn</span>
+            </div>
+            <div class="address-line">
+              <b class="font-semibold text-slate-800">Address</b>:
+              <span class="ml-1">Room 422, Tongbo Building, 555 Liutai Avenue, Wenjiang District, Chengdu, Sichuan, P. R. China, 611130</span>
+            </div>
+          </div>
+
+          <!-- 招生信息 (高亮卡片) -->
+          <div class="callout-students mt-5 p-4 bg-blue-50/80 border border-blue-200/80 rounded-xl text-blue-900">
+            <b class="font-semibold block">Self-motivated students are welcome to join my research group. Please feel free to contact me.</b>
+            <span class="block mt-1">长期招收本科科研实训，硕士、博士研究生。</span>
+          </div>
+
+          <!-- 顶部导航 -->
+          <nav class="top-nav mt-5 flex flex-wrap gap-x-5 gap-y-2">
+            <a href="#experiences" class="font-medium text-slate-600 hover:text-blue-600 transition">Experiences</a>
+            <a href="#publications" class="font-medium text-slate-600 hover:text-blue-600 transition">Publications</a>
+            <a href="#fundings" class="font-medium text-slate-600 hover:text-blue-600 transition">Fundings</a>
+            <a href="#activities" class="font-medium text-slate-600 hover:text-blue-600 transition">Academic Activities</a>
+            <a href="#awards" class="font-medium text-slate-600 hover:text-blue-600 transition">Awards</a>
+            <a href="#visitors" class="font-medium text-slate-600 hover:text-blue-600 transition">Visitors</a>
+            <a href="Teaching.html" target="_blank" class="font-medium text-slate-600 hover:text-blue-600 transition">Teaching</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- ** 主内容区：响应式网格布局 ** -->
+    <main class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+      <!-- 左侧主列 (2/3) -->
+      <div class="lg:col-span-2 flex flex-col gap-8">
+
+        <!-- Experiences -->
+        <section id="experiences" class="glass-card rounded-2xl p-6 md:p-8">
+          <h2 class="section-heading">
+            <span>Experiences</span>
+            <span class="section-tag">BIO</span>
+          </h2>
+          <div class="space-y-3 text-base text-slate-700 leading-relaxed">
+            <p>I am a <a href="https://it.swufe.edu.cn/info/1105/7903.htm" target="_blank" class="section-link">Professor</a> in the School of Computing and Artificial Intelligence at <a href="https://www.swufe.edu.cn/" target="_blank" class="section-link">SWUFE (西南财经大学)</a>.</p>
+            <p>In 2019, I received my Ph.D. in Mathematics from UESTC, advised by <a href="http://www.math.uestc.edu.cn/info/1081/2041.htm" target="_blank" class="section-link">Prof. Ting-Zhu Huang</a> (黄廷祝 教授).</p>
+            <p>From 2017 to 2018, I was a co-training Ph.D. student advised by <a href="http://www.lx.it.pt/~bioucas/" target="_blank" class="section-link">Prof. Jose M. Bioucas Dias</a> at Instituto Superior Técnico.</p>
+            <p>In 2019, I was a research assistant advised by <a href="https://hkumath.hku.hk/~mng/" target="_blank" class="section-link">Prof. Michael Ng</a> (吴国宝 教授) at Hong Kong Baptist University.</p>
+            <p>My research interest is image processing, computer vision, and machine learning.</p>
+          </div>
+          <!-- 关键词 Chips -->
+          <div class="chips-row mt-5 flex flex-wrap gap-2">
+            <div class="chip">Image Processing</div>
+            <div class="chip">Computer Vision</div>
+            <div class="chip">Machine Learning</div>
+            <div class="chip">Tensor Methods</div>
+            <div class="chip">Hyperspectral Imaging</div>
+          </div>
+        </section>
+
+        <!-- Publications -->
+        <section id="publications" class="glass-card rounded-2xl p-6 md:p-8">
+          <h2 class="section-heading">
+            <span>Publications</span>
+            <span class="section-tag">SELECTED WORKS</span>
+          </h2>
+          <p class="text-sm text-slate-500 mb-6">* corresponding author. Click “BibTeX” to copy citation.</p>
+
+          <!-- BOOK CHAPTER -->
+          <h3 class="pub-year-heading">Book Chapter</h3>
+          <ul class="pub-list">
+            <!-- 统一的 pub-item 结构 -->
+            <li class="pub-item">
+              <div class="pub-title">Transform Based Tensor Singular Value Decomposition in Multi dimensional Image Completion</div>
+              <span class="pub-authors"><b>Tai-Xiang Jiang</b>, Michael K. Ng, Xi-Le Zhao</span>
+              <span class="pub-venue">in <b>Tensors for Data Processing: Theory, Methods and Applications</b>, Elsevier.</span>
+              <div class="pub-actions">
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-book-1" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-book-1" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-book-1" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@incollection{Jiang_TensorSVD_Chapter,
+  author    = {Jiang, Tai-Xiang and Ng, Michael K. and Zhao, Xi-Le},
+  title     = {Transform Based Tensor Singular Value Decomposition in Multidimensional Image Completion},
+  booktitle = {Tensors for Data Processing: Theory, Methods and Applications},
+  publisher = {Elsevier},
+  year      = {20XX}
+  % Please complete year, editors, pages, doi, etc. based on the official BibTeX.
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+          </ul>
+
+          <!-- 2025 -->
+          <h3 class="pub-year-heading">2025</h3>
+          <ul class="pub-list">
+            <!-- 2025 - 1 -->
+            <li class="pub-item">
+              <div class="pub-title">Learnable Transform-Assisted Tensor Decomposition for Spatio-Irregular Multidimensional Data Recovery</div>
+              <span class="pub-authors">Hao Zhang, Ting-Zhu Huang, Xi-Le Zhao, Shuqin Zhang, Jin-Yu Xie, <b>Tai-Xiang Jiang</b>, Michael K. Ng</span>
+              <span class="pub-venue"><b>ACM Transactions on Knowledge Discovery from Data</b>, vol. 19, no. 1, article 12, 2025.</span>
+              <div class="pub-actions">
+                <a href="https://doi.org/10.1145/3700582" class="pub-link" target="_blank">[DOI]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2025-1" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2025-1" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2025-1" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{zhang2025learnable,
+  title   = {Learnable Transform-Assisted Tensor Decomposition for Spatio-Irregular Multidimensional Data Recovery},
+  author  = {Zhang, Hao and Huang, Ting{-}Zhu and Zhao, Xi{-}Le and Zhang, Shuqin and Xie, Jin{-}Yu and Jiang, Tai{-}Xiang and Ng, Michael K.},
+  journal = {ACM Transactions on Knowledge Discovery from Data},
+  volume  = {19},
+  number  = {1},
+  pages   = {12:1--12:23},
+  year    = {2025},
+  doi     = {10.1145/3700582}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <!-- 2025 - 2 -->
+            <li class="pub-item">
+              <div class="pub-title">Learning a More Compact Representation for Low-Rank Tensor Completion</div>
+              <span class="pub-authors">Liqiao Yang, Xue Li, <b>Tai-Xiang Jiang</b>, Michael K. Ng</span>
+              <span class="pub-venue"><b>Neurocomputing</b>, vol. 579, article 127733, 2025.</span>
+              <div class="pub-actions">
+                <a href="https://doi.org/10.1016/j.neucom.2024.127733" class="pub-link" target="_blank">[DOI]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2025-2" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2025-2" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2025-2" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{yang2025learning,
+  title   = {Learning a More Compact Representation for Low-Rank Tensor Completion},
+  author  = {Yang, Liqiao and Li, Xue and Jiang, Tai{-}Xiang and Ng, Michael K.},
+  journal = {Neurocomputing},
+  volume  = {579},
+  pages   = {127733},
+  year    = {2025},
+  doi     = {10.1016/j.neucom.2024.127733}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <!-- 2025 - 3 -->
+            <li class="pub-item">
+              <div class="pub-title">Model-Guided Stock Movements Prediction with Homogeneous-Heterogeneous Pattern Learning</div>
+              <span class="pub-authors">Jun Wang, Yihan He, <b>Tai-Xiang Jiang</b>, Jinghua Tan, Qing Li</span>
+              <span class="pub-venue"><b>Applied Soft Computing</b>, vol. 182, article 113519, 2025.</span>
+              <div class="pub-actions">
+                <a href="https://doi.org/10.1016/j.asoc.2025.113519" class="pub-link" target="_blank">[DOI]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2025-3" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2025-3" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2025-3" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{wang2025model,
+  title   = {Model-Guided Stock Movements Prediction with Homogeneous-Heterogeneous Pattern Learning},
+  author  = {Wang, Jun and He, Yihan and Jiang, Tai{-}Xiang and Tan, Jinghua and Li, Qing},
+  journal = {Applied Soft Computing},
+  volume  = {182},
+  pages   = {113519},
+  year    = {2025},
+  doi     = {10.1016/j.asoc.2025.113519}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <!-- 2025 - 4 -->
+            <li class="pub-item">
+              <div class="pub-title">Enhancing the Adversarial Robustness via Manifold Projection</div>
+              <span class="pub-authors">Zhiting Li, Shibai Yin, <b>Tai-Xiang Jiang</b>, Yexun Hu, Jia-Mian Wu, Guowei Yang, Guisong Liu</span>
+              <span class="pub-venue"><b>AAAI Conference on Artificial Intelligence (AAAI)</b>, pp. 451–459, 2025.</span>
+              <div class="pub-actions">
+                <a href="https://ojs.aaai.org/index.php/AAAI/article/view/28901" class="pub-link" target="_blank">[AAAI]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2025-4" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2025-4" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2025-4" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@inproceedings{li2025enhancing,
+  title     = {Enhancing the Adversarial Robustness via Manifold Projection},
+  author    = {Li, Zhiting and Yin, Shibai and Jiang, Tai{-}Xiang and Hu, Yexun and Wu, Jia{-}Mian and Yang, Guowei and Liu, Guisong},
+  booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence},
+  year      = {2025},
+  pages     = {451--459}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <!-- 2025 - 5 -->
+            <li class="pub-item">
+              <div class="pub-title">Spectral Low-Rank Attention with Flow-Based Refinement for Spectral Reconstruction</div>
+              <span class="pub-authors">Yiwen Wang, Zixin Tang, Yexun Hu, Guisong Liu, <b>Tai-Xiang Jiang</b></span>
+              <span class="pub-venue"><b>IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</b>, pp. 1–5, 2025.</span>
+              <div class="pub-actions">
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2025-5" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2025-5" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2025-5" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@inproceedings{wang2025spectral,
+  title     = {Spectral Low-Rank Attention with Flow-Based Refinement for Spectral Reconstruction},
+  author    = {Wang, Yiwen and Tang, Zixin and Hu, Yexun and Liu, Guisong and Jiang, Tai{-}Xiang},
+  booktitle = {Proceedings of the IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
+  year      = {2025},
+  pages     = {1--5}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+          </ul>
+
+          <!-- 2024 -->
+          <h3 class="pub-year-heading">2024</h3>
+          <ul class="pub-list">
+            <!-- 2024 - 1 -->
+            <li class="pub-item">
+              <div class="pub-title">CoNoT: Coupled Nonlinear Transform-Based Low-Rank Tensor Representation for Multidimensional Image Completion</div>
+              <span class="pub-authors">Jian-Li Wang, Ting-Zhu Huang*, Xi-Le Zhao*, Yi-Si Luo, <b>Tai-Xiang Jiang</b></span>
+              <span class="pub-venue"><b>IEEE Transactions on Neural Networks and Learning Systems</b>, vol. 35, no. 7, pp. 8969–8983, 2024.</span>
+              <div class="pub-actions">
+                <a href="paper/online/TNNLS_CoNoT.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <a href="https://doi.org/10.1109/TNNLS.2023.3241246" class="pub-link" target="_blank">[DOI]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2024-1" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2024-1" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2024-1" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{wang2024conot,
+  title   = {CoNoT: Coupled Nonlinear Transform-Based Low-Rank Tensor Representation for Multidimensional Image Completion},
+  author  = {Wang, Jian{-}Li and Huang, Ting{-}Zhu and Zhao, Xi{-}Le and Luo, Yi{-}Si and Jiang, Tai{-}Xiang},
+  journal = {IEEE Transactions on Neural Networks and Learning Systems},
+  volume  = {35},
+  number  = {7},
+  pages   = {8969--8983},
+  year    = {2024},
+  doi     = {10.1109/TNNLS.2023.3241246}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <!-- 2024 - 2 -->
+            <li class="pub-item">
+              <div class="pub-title">Unsupervised Video Rain Streaks Removal with Deep Foreground-Background Modeling</div>
+              <span class="pub-authors">Jun-Hao Zhuang, Yi-Si Luo, Xi-Le Zhao, <b>Tai-Xiang Jiang</b>, Yi Chang, Jun Liu</span>
+              <span class="pub-venue"><b>Journal of Computational and Applied Mathematics</b>, vol. 436, article 115431, 2024.</span>
+              <div class="pub-actions">
+                <a href="paper/2024/Zhuang2024_UnsupervisedVideoRain.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2024-2" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2024-2" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2024-2" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{zhuang2024unsupervised,
+  title   = {Unsupervised Video Rain Streaks Removal with Deep Foreground-Background Modeling},
+  author  = {Zhuang, Jun{-}Hao and Luo, Yi{-}Si and Zhao, Xi{-}Le and Jiang, Tai{-}Xiang and Chang, Yi and Liu, Jun},
+  journal = {Journal of Computational and Applied Mathematics},
+  volume  = {436},
+  pages   = {115431},
+  year    = {2024}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <!-- 2024 - 3 -->
+            <li class="pub-item">
+              <div class="pub-title">Superpixel-Oriented Thick Cloud Removal Method for Multitemporal Remote Sensing Images</div>
+              <span class="pub-authors">Qin Jiang, Xi-Le Zhao, Jie Lin, Jinghua Yang, Jiangtao Peng, <b>Tai-Xiang Jiang</b></span>
+              <span class="pub-venue"><b>IEEE Geoscience and Remote Sensing Letters</b>, vol. 21, pp. 1–5, 2024.</span>
+              <div class="pub-actions">
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2024-3" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2024-3" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2024-3" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{jiang2024superpixel,
+  title   = {Superpixel-Oriented Thick Cloud Removal Method for Multitemporal Remote Sensing Images},
+  author  = {Jiang, Qin and Zhao, Xi{-}Le and Lin, Jie and Yang, Jinghua and Peng, Jiangtao and Jiang, Tai{-}Xiang},
+  journal = {IEEE Geoscience and Remote Sensing Letters},
+  volume  = {21},
+  pages   = {1--5},
+  year    = {2024}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <!-- 2024 - 4 -->
+            <li class="pub-item">
+              <div class="pub-title">A Guidable Nonlocal Low-Rank Approximation Model for Hyperspectral Image Denoising</div>
+              <span class="pub-authors">Yong Chen, Juan Zhang, Jinshan Zeng, Wenzhen Lai, Xinfeng Gui, <b>Tai-Xiang Jiang</b></span>
+              <span class="pub-venue"><b>Signal Processing</b>, vol. 215, article 109266, 2024.</span>
+              <div class="pub-actions">
+                <a href="https://doi.org/10.1016/j.sigpro.2023.109266" class="pub-link" target="_blank">[DOI]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2024-4" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2024-4" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2024-4" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{chen2024guidable,
+  title   = {A Guidable Nonlocal Low-Rank Approximation Model for Hyperspectral Image Denoising},
+  author  = {Chen, Yong and Zhang, Juan and Zeng, Jinshan and Lai, Wenzhen and Gui, Xinfeng and Jiang, Tai{-}Xiang},
+  journal = {Signal Processing},
+  volume  = {215},
+  pages   = {109266},
+  year    = {2024},
+  doi     = {10.1016/j.sigpro.2023.109266}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <!-- 2024 - 5 -->
+            <li class="pub-item">
+              <div class="pub-title">Fast Large-Scale Hyperspectral Image Denoising via Noniterative Low-Rank Subspace Representation</div>
+              <span class="pub-authors">Yong Chen, Jinshan Zeng, Wei He, Xi-Le Zhao, <b>Tai-Xiang Jiang</b>, Qing Huang</span>
+              <span class="pub-venue"><b>IEEE Transactions on Geoscience and Remote Sensing</b>, vol. 62, pp. 1–14, 2024.</span>
+              <div class="pub-actions">
+                <a href="https://doi.org/10.1109/TGRS.2023.3332579" class="pub-link" target="_blank">[DOI]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2024-5" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2024-5" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2024-5" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{chen2024fast,
+  title   = {Fast Large-Scale Hyperspectral Image Denoising via Noniterative Low-Rank Subspace Representation},
+  author  = {Chen, Yong and Zeng, Jinshan and He, Wei and Zhao, Xi{-}Le and Jiang, Tai{-}Xiang and Huang, Qing},
+  journal = {IEEE Transactions on Geoscience and Remote Sensing},
+  volume  = {62},
+  pages   = {1--14},
+  year    = {2024},
+  doi     = {10.1109/TGRS.2023.3332579}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <!-- 2024 - 6 -->
+            <li class="pub-item">
+              <div class="pub-title">Adaptive Sampling with Tensor Leverage Scores for Exact Low-Rank Third-Order Tensor Completion</div>
+              <span class="pub-authors"><b>Tai-Xiang Jiang</b>, Michael K. Ng, Guangjing Song, Junjun Pan</span>
+              <span class="pub-venue"><b>Journal of Scientific Computing</b>, 2024.</span>
+              <div class="pub-actions">
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2024-6" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2024-6" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2024-6" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{jiang2024adaptive,
+  title   = {Adaptive Sampling with Tensor Leverage Scores for Exact Low-Rank Third-Order Tensor Completion},
+  author  = {Jiang, Tai{-}Xiang and Ng, Michael K. and Song, Guangjing and Pan, Junjun},
+  journal = {Journal of Scientific Computing},
+  year    = {2024}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <!-- 2024 - 7 -->
+            <li class="pub-item">
+              <div class="pub-title">Incremental Algorithms for Truncated Higher-Order Singular Value Decompositions</div>
+              <span class="pub-authors">Chao Zeng, Michael K. Ng, <b>Tai-Xiang Jiang</b></span>
+              <span class="pub-venue"><b>BIT Numerical Mathematics</b>, 2024.</span>
+              <div class="pub-actions">
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2024-7" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2024-7" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2024-7" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{zeng2024incremental,
+  title   = {Incremental Algorithms for Truncated Higher-Order Singular Value Decompositions},
+  author  = {Zeng, Chao and Ng, Michael K. and Jiang, Tai{-}Xiang},
+  journal = {BIT Numerical Mathematics},
+  year    = {2024}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+          </ul>
+
+          <!-- 2023 -->
+          <h3 class="pub-year-heading">2023</h3>
+          <ul class="pub-list">
+            <!-- 2023 - 1 -->
+            <li class="pub-item">
+              <div class="pub-title">Tangent Space Based Alternating Projections for Nonnegative Low Rank Matrix Approximation</div>
+              <span class="pub-authors">Guangjing Song, Michael K. Ng, <b>Tai-Xiang Jiang*</b></span>
+              <span class="pub-venue"><b>IEEE Transactions on Knowledge and Data Engineering</b>, vol. 35, no. 11, pp. 11917–11934, 2023.</span>
+              <div class="pub-actions">
+                <a href="paper/online/TKDE-TAP.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <a href="https://doi.org/10.1109/TKDE.2022.3224052" class="pub-link" target="_blank">[DOI]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2023-1" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2023-1" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2023-1" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{song2023tangent,
+  title   = {Tangent Space Based Alternating Projections for Nonnegative Low Rank Matrix Approximation},
+  author  = {Song, Guangjing and Ng, Michael K. and Jiang, Tai{-}Xiang},
+  journal = {IEEE Transactions on Knowledge and Data Engineering},
+  volume  = {35},
+  number  = {11},
+  pages   = {11917--11934},
+  year    = {2023},
+  doi     = {10.1109/TKDE.2022.3224052}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <!-- 2023 - 2 -->
+            <li class="pub-item">
+              <div class="pub-title">Nonnegative Low Rank Tensor Approximations with Multidimensional Image Applications</div>
+              <span class="pub-authors"><b>Tai-Xiang Jiang</b>, Michael K. Ng, Junjun Pan, Guangjing Song*</span>
+              <span class="pub-venue"><b>Numerische Mathematik</b>, vol. 153, no. 1, pp. 141–170, 2023.</span>
+              <div class="pub-actions">
+                <a href="paper/2023/Nonnegative low rank tensor approximations with multidimensional image applications.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <a href="https://doi.org/10.1007/s00211-022-01328-6" class="pub-link" target="_blank">[DOI]</a>
+                <a href="https://arxiv.org/abs/2007.14137" class="pub-link" target="_blank">[ArXiv]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2023-2" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2023-2" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2023-2" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{jiang2023nonnegative,
+  title   = {Nonnegative Low Rank Tensor Approximations with Multidimensional Image Applications},
+  author  = {Jiang, Tai{-}Xiang and Ng, Michael K. and Pan, Junjun and Song, Guangjing},
+  journal = {Numerische Mathematik},
+  volume  = {153},
+  number  = {1},
+  pages   = {141--170},
+  year    = {2023},
+  doi     = {10.1007/s00211-022-01328-6}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <!-- 2023 - 3 -->
+            <li class="pub-item">
+              <div class="pub-title">Dictionary Learning with Low-Rank Coding Coefficients for Tensor Completion</div>
+              <span class="pub-authors"><b>Tai-Xiang Jiang</b>, Xi-Le Zhao, Hao Zhang, Michael K. Ng*</span>
+              <span class="pub-venue"><b>IEEE Transactions on Neural Networks and Learning Systems</b>, vol. 34, no. 2, pp. 932–946, 2023.</span>
+              <div class="pub-actions">
+                <a href="paper/2023/TNNLS-Dictionary_Learning_With_Low-Rank_Coding_Coefficients_for_Tensor_Completion.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <a href="https://doi.org/10.1109/TNNLS.2021.3104837" class="pub-link" target="_blank">[DOI]</a>
+                <a href="demos/DTNN_demo.zip" class="pub-link" target="_blank">[Matlab Demo]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2023-3" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2023-3" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2023-3" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{jiang2023dictionary,
+  title   = {Dictionary Learning with Low-Rank Coding Coefficients for Tensor Completion},
+  author  = {Jiang, Tai{-}Xiang and Zhao, Xi{-}Le and Zhang, Hao and Ng, Michael K.},
+  journal = {IEEE Transactions on Neural Networks and Learning Systems},
+  volume  = {34},
+  number  = {2},
+  pages   = {932--946},
+  year    = {2023},
+  doi     = {10.1109/TNNLS.2021.3104837}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <!-- 2023 - 4 -->
+            <li class="pub-item">
+              <div class="pub-title">Essential Tensor Learning for Multimodal Information-Driven Stock Movement Prediction</div>
+              <span class="pub-authors">Jun Wang, Yexun Hu, <b>Tai-Xiang Jiang*</b>, Jinghua Tan*, Qing Li</span>
+              <span class="pub-venue"><b>Knowledge-Based Systems</b>, vol. 262, article 110262, 2023.</span>
+              <div class="pub-actions">
+                <a href="paper/2023/KBS-2023-STOCK-RPCA.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <a href="https://doi.org/10.1016/j.knosys.2023.110262" class="pub-link" target="_blank">[DOI]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2023-4" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2023-4" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2023-4" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{wang2023essential,
+  title   = {Essential Tensor Learning for Multimodal Information-Driven Stock Movement Prediction},
+  author  = {Wang, Jun and Hu, Yexun and Jiang, Tai{-}Xiang and Tan, Jinghua and Li, Qing},
+  journal = {Knowledge-Based Systems},
+  volume  = {262},
+  pages   = {110262},
+  year    = {2023},
+  doi     = {10.1016/j.knosys.2023.110262}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <!-- 2023 - 5 -->
+            <li class="pub-item">
+              <div class="pub-title">GuidedNet: A General CNN Fusion Framework via High-Resolution Guidance for Hyperspectral Image Super-Resolution</div>
+              <span class="pub-authors">Ran Ran, Liang-Jian Deng*, <b>Tai-Xiang Jiang</b>, Jin-Fan Hu, Jocelyn Chanussot, Gemine Vivone</span>
+              <span class="pub-venue"><b>IEEE Transactions on Cybernetics</b>, vol. 53, no. 7, pp. 4148–4161, 2023.</span>
+              <div class="pub-actions">
+                <a href="https://liangjiandeng.github.io/papers/2023/ran-tcyber2023.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <a href="https://doi.org/10.1109/TCYB.2023.3238200" class="pub-link" target="_blank">[DOI]</a>
+                <a href="https://github.com/Evangelion09/GuidedNet" class="pub-link" target="_blank">[Project Page]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2023-5" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2023-5" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2023-5" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{ran2023guidednet,
+  title   = {GuidedNet: A General CNN Fusion Framework via High-Resolution Guidance for Hyperspectral Image Super-Resolution},
+  author  = {Ran, Ran and Deng, Liang{-}Jian and Jiang, Tai{-}Xiang and Hu, Jin{-}Fan and Chanussot, Jocelyn and Vivone, Gemine},
+  journal = {IEEE Transactions on Cybernetics},
+  volume  = {53},
+  number  = {7},
+  pages   = {4148--4161},
+  year    = {2023},
+  doi     = {10.1109/TCYB.2023.3238200}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <!-- 2023 - 6 -->
+            <li class="pub-item">
+              <div class="pub-title">SelfS2: Self-Supervised Transfer Learning for Sentinel-2 Multispectral Image Super-Resolution</div>
+              <span class="pub-authors">Xiao Qian, <b>Tai-Xiang Jiang*</b>, Xi-Le Zhao</span>
+              <span class="pub-venue"><b>IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing</b>, vol. 16, pp. 215–227, 2023.</span>
+              <div class="pub-actions">
+                <a href="https://ieeexplore.ieee.org/document/9964200" class="pub-link" target="_blank">[IEEE]</a>
+                <a href="https://doi.org/10.1109/JSTARS.2022.3224987" class="pub-link" target="_blank">[DOI]</a>
+                <a href="https://github.com/gulubao/SelfS2-Demo" class="pub-link" target="_blank">[PyTorch Demo]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2023-6" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2023-6" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2023-6" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{qian2023selfs2,
+  title   = {SelfS2: Self-Supervised Transfer Learning for Sentinel-2 Multispectral Image Super-Resolution},
+  author  = {Qian, Xiao and Jiang, Tai{-}Xiang and Zhao, Xi{-}Le},
+  journal = {IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing},
+  volume  = {16},
+  pages   = {215--227},
+  year    = {2023},
+  doi     = {10.1109/JSTARS.2022.3224987}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+          </ul>
+
+          <!-- 2022 -->
+          <h3 class="pub-year-heading">2022</h3>
+          <ul class="pub-list">
+            <li class="pub-item">
+              <div class="pub-title">Adaptive hyperspectral mixed noise removal</div>
+              <span class="pub-authors"><b>Tai-Xiang Jiang</b>, Lina Zhuang*, Ting-Zhu Huang, Xi-Le Zhao, José M Bioucas-Dias</span>
+              <span class="pub-venue"><b>IEEE Transactions on Geoscience and Remote Sensing</b>, 2022.</span>
+              <div class="pub-actions">
+                <a href="paper/2022/TGRS-2022-Adaptive_Hyperspectral_Mixed_Noise_Removal.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <a href="https://github.com/TaiXiangJiang/TaiXiangJiang.github.io/tree/main/demos" class="pub-link" target="_blank">[PyTorch Demo]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2022-1" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2022-1" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2022-1" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{Jiang2022_AdaptiveHSI,
+  author  = {Jiang, Tai{-}Xiang and Zhuang, Lina and Huang, Ting{-}Zhu and Zhao, Xi{-}Le and Bioucas{-}Dias, Jos{\'e} M.},
+  title   = {Adaptive Hyperspectral Mixed Noise Removal},
+  journal = {IEEE Transactions on Geoscience and Remote Sensing},
+  year    = {2022}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <li class="pub-item">
+              <div class="pub-title">Degradation Accordant Plug-and-Play for Low-Rank Tensor Completion</div>
+              <span class="pub-authors">Yexun Hu, <b>Tai-Xiang Jiang*</b>, Xi-Le Zhao</span>
+              <span class="pub-venue"><b>IJCAI 2022</b></span>
+              <div class="pub-actions">
+                <a href="paper/2022/IJCAI-2022.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <a href="paper/2022/IJCAI-2022-Supplementary_Material.pdf" class="pub-link" target="_blank">[Supplementary Material]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2022-2" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2022-2" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2022-2" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@inproceedings{Hu2022_IJCAI_DAPnP,
+  author    = {Hu, Yexun and Jiang, Tai{-}Xiang and Zhao, Xi{-}Le},
+  title     = {Degradation Accordant Plug-and-Play for Low-Rank Tensor Completion},
+  booktitle = {Proceedings of the 31st International Joint Conference on Artificial Intelligence (IJCAI)},
+  year      = {2022}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <li class="pub-item">
+              <div class="pub-title">HLRTF: Hierarchical Low-Rank Tensor Factorization for Inverse Problems in Multi-Dimensional Imaging</div>
+              <span class="pub-authors">Yisi Luo, Xi-Le Zhao*, Deyu Meng, <b>Tai-Xiang Jiang</b></span>
+              <span class="pub-venue"><b>IEEE CVPR 2022</b></span>
+              <div class="pub-actions">
+                <a href="paper/2022/CVPR 2022.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2022-3" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2022-3" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2022-3" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@inproceedings{Luo2022_HLRTF_CVPR,
+  author    = {Luo, Yisi and Zhao, Xi{-}Le and Meng, Deyu and Jiang, Tai{-}Xiang},
+  title     = {HLRTF: Hierarchical Low-Rank Tensor Factorization for Inverse Problems in Multi-Dimensional Imaging},
+  booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2022}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <li class="pub-item">
+              <div class="pub-title">UConNet: Unsupervised Controllable Network for Image and Video Deraining</div>
+              <span class="pub-authors">Junhao Zhuang, Yisi Luo, Xile Zhao*, <b>Taixiang Jiang</b>, Bichuan Guo</span>
+              <span class="pub-venue"><b>ACM MM 2022</b></span>
+              <div class="pub-actions">
+                <a href="paper/2022/ACM_MM_2022.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2022-4" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2022-4" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2022-4" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@inproceedings{Zhuang2022_UConNet,
+  author    = {Zhuang, Junhao and Luo, Yisi and Zhao, Xi{-}Le and Jiang, Tai{-}Xiang and Guo, Bichuan},
+  title     = {UConNet: Unsupervised Controllable Network for Image and Video Deraining},
+  booktitle = {Proceedings of the 30th ACM International Conference on Multimedia (ACM MM)},
+  year      = {2022}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <li class="pub-item">
+              <div class="pub-title">
+                Tensor Completion via Complementary Global, Local, and Nonlocal Priors
+                <span class="badge-highlight">ESI Highly Cited</span>
+              </div>
+              <span class="pub-authors">Xi-Le Zhao#, Jing-Hua Yang#, Tian-Hui Ma, <b>Tai-Xiang Jiang*</b>, Michael K. Ng, Ting-Zhu Huang</span>
+              <span class="pub-venue"><b>IEEE Transactions on Image Processing</b>, 2022.</span>
+              <div class="pub-actions">
+                <a href="paper/2022/TIP-2022Tensor completion via complementary global, local, and nonlocal priors.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2022-5" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2022-5" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2022-5" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{Zhao2022_TensorCompletionPriors,
+  author  = {Zhao, Xi{-}Le and Yang, Jing{-}Hua and Ma, Tian{-}Hui and Jiang, Tai{-}Xiang and Ng, Michael K. and Huang, Ting{-}Zhu},
+  title   = {Tensor Completion via Complementary Global, Local, and Nonlocal Priors},
+  journal = {IEEE Transactions on Image Processing},
+  year    = {2022}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <li class="pub-item">
+              <div class="pub-title">Self-Supervised Nonlinear Transform-Based Tensor Nuclear Norm for Multi-Dimensional Image Recovery</div>
+              <span class="pub-authors">Yi-Si Luo, Xi-Le Zhao*, <b>Tai-Xiang Jiang</b>, Yi Chang, Michael K. Ng, Chao Li</span>
+              <span class="pub-venue"><b>IEEE Transactions on Image Processing</b>, 2022.</span>
+              <div class="pub-actions">
+                <a href="paper/2022/TIP-2022-Self-Supervised_Nonlinear_Transform-Based_Tensor_Nuclear_Norm_for_Multi-Dimensional_Image_Recovery.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2022-6" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2022-6" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2022-6" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{Luo2022_SelfSupervisedTNN,
+  author  = {Luo, Yi{-}Si and Zhao, Xi{-}Le and Jiang, Tai{-}Xiang and Chang, Yi and Ng, Michael K. and Li, Chao},
+  title   = {Self-Supervised Nonlinear Transform-Based Tensor Nuclear Norm for Multi-Dimensional Image Recovery},
+  journal = {IEEE Transactions on Image Processing},
+  year    = {2022}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <li class="pub-item">
+              <div class="pub-title">LAGConv: Local-context Adaptive Convolution Kernels with Global Harmonic Bias for Pansharpening</div>
+              <span class="pub-authors">Zi-Rong Jin, Tian-Jing Zhang, <b>Tai-Xiang Jiang</b>, Gemine Vivone, Liang-Jian Deng*</span>
+              <span class="pub-venue"><b>AAAI 2022</b></span>
+              <div class="pub-actions">
+                <a href="https://liangjiandeng.github.io/papers/2022/jin-aaai2022.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <a href="https://github.com/liangjiandeng/LAGConv" class="pub-link" target="_blank">[code]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2022-7" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2022-7" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2022-7" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@inproceedings{Jin2022_LAGConv,
+  author    = {Jin, Zi{-}Rong and Zhang, Tian{-}Jing and Jiang, Tai{-}Xiang and Vivone, Gemine and Deng, Liang{-}Jian},
+  title     = {LAGConv: Local-context Adaptive Convolution Kernels with Global Harmonic Bias for Pansharpening},
+  booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence},
+  year      = {2022}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <li class="pub-item">
+              <div class="pub-title">Multiscale Feature Tensor Train Rank Minimization for Multidimensional Image Recovery</div>
+              <span class="pub-authors">Hao Zhang, Xi-Le Zhao*, <b>Tai-Xiang Jiang</b>, Michael K. Ng, Ting-Zhu Huang</span>
+              <span class="pub-venue"><b>IEEE Transactions on Cybernetics</b>, 2022.</span>
+              <div class="pub-actions">
+                <a href="paper/2021/TCyb-2021-Multiscale_Feature_Tensor_Train_Rank_Minimization_for_Multidimensional_Image_Recovery.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2022-8" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2022-8" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2022-8" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{Zhang2022_MFTTR,
+  author  = {Zhang, Hao and Zhao, Xi{-}Le and Jiang, Tai{-}Xiang and Ng, Michael K. and Huang, Ting{-}Zhu},
+  title   = {Multiscale Feature Tensor Train Rank Minimization for Multidimensional Image Recovery},
+  journal = {IEEE Transactions on Cybernetics},
+  year    = {2022}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <li class="pub-item">
+              <div class="pub-title">Hyperspectral Image Super-resolution via Deep Spatio-spectral Convolutional Neural Networks</div>
+              <span class="pub-authors">Jin-Fan Hu, Ting-Zhu Huang*, Liang-Jian Deng*, <b>Tai-Xiang Jiang</b>, Gemine Vivone, Jocelyn Chanussot</span>
+              <span class="pub-venue"><b>IEEE Transactions on Neural Networks and Learning Systems</b>, 2022.</span>
+              <div class="pub-actions">
+                <a href="paper/2022/TNNLS-Hyperspectral_Image_Super-Resolution_via_Deep_Spatiospectral_Attention_Convolutional_Neural_Networks.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <a href="https://liangjiandeng.github.io/Projects_Res/HSRnet_2021tnnls.html" class="pub-link" target="_blank">[Project Page]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2022-9" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2022-9" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2022-9" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{Hu2022_HSI_SR,
+  author  = {Hu, Jin{-}Fan and Huang, Ting{-}Zhu and Deng, Liang{-}Jian and Jiang, Tai{-}Xiang and Vivone, Gemine and Chanussot, Jocelyn},
+  title   = {Hyperspectral Image Super-resolution via Deep Spatio-spectral Convolutional Neural Networks},
+  journal = {IEEE Transactions on Neural Networks and Learning Systems},
+  year    = {2022}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+          </ul>
+
+          <!-- 2021 -->
+          <h3 class="pub-year-heading">2021</h3>
+          <ul class="pub-list">
+            <li class="pub-item">
+              <div class="pub-title">An Approximation Method of CP Rank for Third-order Tensor Completion</div>
+              <span class="pub-authors">Chao Zeng*, <b>Tai-Xiang Jiang</b>, Michael K. Ng</span>
+              <span class="pub-venue"><b>Numerische Mathematik</b>, 2021.</span>
+              <div class="pub-actions">
+                <a href="paper/2021/Zeng2021_Article_AnApproximationMethodOfCPRankF.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2021-1" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2021-1" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2021-1" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{Zeng2021_CP_RankApprox,
+  author  = {Zeng, Chao and Jiang, Tai{-}Xiang and Ng, Michael K.},
+  title   = {An Approximation Method of CP Rank for Third-order Tensor Completion},
+  journal = {Numerische Mathematik},
+  year    = {2021}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <li class="pub-item">
+              <div class="pub-title">Rain Streaks Removal for Single Image via Kernel-Guided Convolutional Neural Network</div>
+              <span class="pub-authors">Ye-Tao Wang, Xi-Le Zhao*, <b>Tai-Xiang Jiang</b>, Liang-Jian Deng, Yi Chang, Ting-Zhu Huang</span>
+              <span class="pub-venue"><b>IEEE Transactions on Neural Networks and Learning Systems</b>, 2021.</span>
+              <div class="pub-actions">
+                <a href="paper/2021/TNNLS-Rain_Streaks_Removal_for_Single_Image_via_Kernel-Guided_Convolutional_Neural_Network.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <a href="https://github.com/zhaoxile/KGCNN" class="pub-link" target="_blank">[Python Demo]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2021-2" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2021-2" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2021-2" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{Wang2021_KGCNN_RainRemoval,
+  author  = {Wang, Ye{-}Tao and Zhao, Xi{-}Le and Jiang, Tai{-}Xiang and Deng, Liang{-}Jian and Chang, Yi and Huang, Ting{-}Zhu},
+  title   = {Rain Streaks Removal for Single Image via Kernel-Guided Convolutional Neural Network},
+  journal = {IEEE Transactions on Neural Networks and Learning Systems},
+  year    = {2021}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <li class="pub-item">
+              <div class="pub-title">Fully-Connected Tensor Network Decomposition for Higher-Order Tensor Completion</div>
+              <span class="pub-authors">Yu-Bang Zheng, Ting-Zhu Huang*, Xi-Le Zhao*, Qi-Bin Zhao, <b>Tai-Xiang Jiang</b></span>
+              <span class="pub-venue"><b>AAAI 2021</b></span>
+              <div class="pub-actions">
+                <a href="paper/2021/AAAI-4990.ZhengY.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <a href="https://yubangzheng.github.io/codes/code_FCTN_Decomposition.zip" class="pub-link" target="_blank">[Matlab Demo]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2021-3" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2021-3" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2021-3" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@inproceedings{Zheng2021_FCTN,
+  author    = {Zheng, Yu{-}Bang and Huang, Ting{-}Zhu and Zhao, Xi{-}Le and Zhao, Qi{-}Bin and Jiang, Tai{-}Xiang},
+  title     = {Fully-Connected Tensor Network Decomposition for Higher-Order Tensor Completion},
+  booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence},
+  year      = {2021}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <li class="pub-item">
+              <div class="pub-title">Multi-dimensional Visual Data Completion via Low-Rank Tensor Representation under Coupled Transform</div>
+              <span class="pub-authors">Jian-Li Wang, Ting-Zhu Huang*, Xi-Le Zhao*, <b>Tai-Xiang Jiang</b>, Michael K. Ng</span>
+              <span class="pub-venue"><b>IEEE Transactions on Image Processing</b>, 2021.</span>
+              <div class="pub-actions">
+                <a href="paper/2021/TIP-Couple_Transform.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2021-4" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2021-4" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2021-4" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{Wang2021_CoupledTransform,
+  author  = {Wang, Jian{-}Li and Huang, Ting{-}Zhu and Zhao, Xi{-}Le and Jiang, Tai{-}Xiang and Ng, Michael K.},
+  title   = {Multi-dimensional Visual Data Completion via Low-Rank Tensor Representation under Coupled Transform},
+  journal = {IEEE Transactions on Image Processing},
+  year    = {2021}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <li class="pub-item">
+              <div class="pub-title">A Tensor Subspace Representation Method for Hyperspectral Image Denoising</div>
+              <span class="pub-authors">Jie Lin, Ting-Zhu Huang, Xi-Le Zhao, <b>Tai-Xiang Jiang</b>, Lina Zhuang</span>
+              <span class="pub-venue"><b>IEEE Transactions on Geoscience and Remote Sensing</b>, 2021.</span>
+              <div class="pub-actions">
+                <a href="paper/2021/tensor-sbuspace.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <a href="https://github.com/zhaoxile/TenSRDe" class="pub-link" target="_blank">[Matlab Demo]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2021-5" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2021-5" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2021-5" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{Lin2021_TensorSubspace,
+  author  = {Lin, Jie and Huang, Ting{-}Zhu and Zhao, Xi{-}Le and Jiang, Tai{-}Xiang and Zhuang, Lina},
+  title   = {A Tensor Subspace Representation Method for Hyperspectral Image Denoising},
+  journal = {IEEE Transactions on Geoscience and Remote Sensing},
+  year    = {2021}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+          </ul>
+
+          <!-- 2020 -->
+          <h3 class="pub-year-heading">2020</h3>
+          <ul class="pub-list">
+            <li class="pub-item">
+              <div class="pub-title">Deep Plug-And-Play Prior for Low-Rank Tensor Completion</div>
+              <span class="pub-authors">Xi-Le Zhao, Wen-Hao Xu, <b>Tai-Xiang Jiang*</b>, Yao Wang, Michael K. Ng</span>
+              <span class="pub-venue"><b>Neurocomputing</b>, 2020.</span>
+              <div class="pub-actions">
+                <a href="paper/2020/Deep%20Plug-and-Play%20Prior%20for%20Low-Rank%20Tensor%20Completion.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <a href="https://github.com/TaiXiangJiang/Deep-Plug-and-Play-Prior-for-Low-Rank-Tensor-Completion/tree/master" class="pub-link" target="_blank">[Matlab Demo]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2020-1" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2020-1" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2020-1" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{Zhao2020_DeepPnP_Tensor,
+  author  = {Zhao, Xi{-}Le and Xu, Wen{-}Hao and Jiang, Tai{-}Xiang and Wang, Yao and Ng, Michael K.},
+  title   = {Deep Plug-and-Play Prior for Low-Rank Tensor Completion},
+  journal = {Neurocomputing},
+  year    = {2020}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <li class="pub-item">
+              <div class="pub-title">Framelet Representation of Tensor Nuclear Norm for Third-Order Tensor Completion</div>
+              <span class="pub-authors"><b>Tai-Xiang Jiang</b>, Michael K. Ng, Xi-Le Zhao*, Ting-Zhu Huang</span>
+              <span class="pub-venue"><b>IEEE Transactions on Image Processing</b>, 2020.</span>
+              <div class="pub-actions">
+                <a href="paper/2020/Framelet%20Representation%20of%20Tensor%20Nuclear%20Norm%20for%20Third-Order%20Tensor%20Completion.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <a href="https://github.com/TaiXiangJiang/Framelet-TNN" class="pub-link" target="_blank">[Matlab Demo]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2020-2" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2020-2" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2020-2" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{Jiang2020_FrameletTNN,
+  author  = {Jiang, Tai{-}Xiang and Ng, Michael K. and Zhao, Xi{-}Le and Huang, Ting{-}Zhu},
+  title   = {Framelet Representation of Tensor Nuclear Norm for Third-Order Tensor Completion},
+  journal = {IEEE Transactions on Image Processing},
+  year    = {2020}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <li class="pub-item">
+              <div class="pub-title">
+                Mixed Noise Removal in Hyperspectral Image via Low-Fibered-Rank Regularization
+                <span class="badge-highlight">ESI Highly Cited</span>
+              </div>
+              <span class="pub-authors">Yu-Bang Zheng, Ting-Zhu Huang, Xi-Le Zhao, <b>Tai-Xiang Jiang</b></span>
+              <span class="pub-venue"><b>IEEE Transactions on Geoscience and Remote Sensing</b>, 2020.</span>
+              <div class="pub-actions">
+                <a href="paper/2020/Mixed%20Noise%20Removal%20in%20Hyperspectral%20Image%20via%20Low-Fibered-Rank%20Regularization.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <a href="https://github.com/zhaoxile/Mixed-Noise-Removal-in-Hyperspectral-Image-via-Low-Fibered-Rank-Regularization" class="pub-link" target="_blank">[Matlab Demo]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2020-3" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2020-3" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2020-3" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{Zheng2020_LowFiberRank,
+  author  = {Zheng, Yu{-}Bang and Huang, Ting{-}Zhu and Zhao, Xi{-}Le and Jiang, Tai{-}Xiang},
+  title   = {Mixed Noise Removal in Hyperspectral Image via Low-Fibered-Rank Regularization},
+  journal = {IEEE Transactions on Geoscience and Remote Sensing},
+  year    = {2020}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <li class="pub-item">
+              <div class="pub-title">Fast Algorithm with Theoretical Guarantees for Constrained Low-Tubal-Rank Tensor Recovery in Hyperspectral Images Denoising</div>
+              <span class="pub-authors">Xi-Le Zhao, Hao Zhang, <b>Tai-Xiang Jiang</b>, Michael Ng, Xiong-Jun Zhang</span>
+              <span class="pub-venue"><b>Neurocomputing</b>, 2020.</span>
+              <div class="pub-actions">
+                <a href="paper/2020/Fast%20algorithm%20with%20theoretical%20guarantees%20for%20constrained%20low-tubal-rank%20tensor%20recovery%20in%20hyperspectral%20images%20denoising.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2020-4" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2020-4" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2020-4" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{Zhao2020_LowTubalRankHSI,
+  author  = {Zhao, Xi{-}Le and Zhang, Hao and Jiang, Tai{-}Xiang and Ng, Michael K. and Zhang, Xiong{-}Jun},
+  title   = {Fast Algorithm with Theoretical Guarantees for Constrained Low-Tubal-Rank Tensor Recovery in Hyperspectral Images Denoising},
+  journal = {Neurocomputing},
+  year    = {2020}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <li class="pub-item">
+              <div class="pub-title">Video Deraining via Nonlocal Low-Rank Regularization</div>
+              <span class="pub-authors">Yu-Gang Wang, Ting-Zhu Huang, Xi-Le Zhao, <b>Tai-Xiang Jiang</b></span>
+              <span class="pub-venue"><b>Applied Mathematical Modelling</b>, 2020.</span>
+              <div class="pub-actions">
+                <a href="paper/2020/Video%20deraining%20via%20nonlocal%20low-rank%20regularization.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2020-5" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2020-5" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2020-5" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{Wang2020_VideoDerainNLR,
+  author  = {Wang, Yu{-}Gang and Huang, Ting{-}Zhu and Zhao, Xi{-}Le and Jiang, Tai{-}Xiang},
+  title   = {Video Deraining via Nonlocal Low-Rank Regularization},
+  journal = {Applied Mathematical Modelling},
+  year    = {2020}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <li class="pub-item">
+              <div class="pub-title">Multi-Dimensional Imaging Data Recovery via Minimizing the Partial Sum of Tubal Nuclear Norm</div>
+              <span class="pub-authors"><b>Tai-Xiang Jiang</b>, Ting-Zhu Huang, Xi-Le Zhao, Liang-Jian Deng</span>
+              <span class="pub-venue"><b>Journal of Computational and Applied Mathematics</b>, 2020.</span>
+              <div class="pub-actions">
+                <a href="paper/2020/PSTNN.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <a href="https://github.com/TaiXiangJiang/PSTNN" class="pub-link" target="_blank">[Matlab Demo]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2020-6" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2020-6" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2020-6" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{Jiang2020_PSTNN,
+  author  = {Jiang, Tai{-}Xiang and Huang, Ting{-}Zhu and Zhao, Xi{-}Le and Deng, Liang{-}Jian},
+  title   = {Multi-Dimensional Imaging Data Recovery via Minimizing the Partial Sum of Tubal Nuclear Norm},
+  journal = {Journal of Computational and Applied Mathematics},
+  year    = {2020}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <li class="pub-item">
+              <div class="pub-title">Tensor N-Tubal Rank and Its Convex Relaxation for Low-Rank Tensor Recovery</div>
+              <span class="pub-authors">Yu-Bang Zheng, Ting-Zhu Huang, Xi-Le Zhao, Teng-Yu Ji, <b>Tai-Xiang Jiang</b>, Tian-Hui Ma</span>
+              <span class="pub-venue"><b>Applied Mathematical Modelling</b>, 2020.</span>
+              <div class="pub-actions">
+                <a href="paper/2020/Tensor%20N-tubal%20rank%20and%20its%20convex%20relaxation%20for%20low-rank%20tensor%20recovery.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <a href="https://yubangzheng.github.io/codes/code_WSTNN.zip" class="pub-link" target="_blank">[Matlab Demo]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2020-7" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2020-7" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2020-7" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{Zheng2020_NTubal,
+  author  = {Zheng, Yu{-}Bang and Huang, Ting{-}Zhu and Zhao, Xi{-}Le and Ji, Teng{-}Yu and Jiang, Tai{-}Xiang and Ma, Tian{-}Hui},
+  title   = {Tensor N-Tubal Rank and Its Convex Relaxation for Low-Rank Tensor Recovery},
+  journal = {Applied Mathematical Modelling},
+  year    = {2020}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+          </ul>
+
+          <!-- 2019 -->
+          <h3 class="pub-year-heading">2019</h3>
+          <ul class="pub-list">
+            <li class="pub-item">
+              <div class="pub-title">FastDeRain: A Novel Video Rain Streak Removal Method Using Directional Gradient Priors</div>
+              <span class="pub-authors"><b>Tai-Xiang Jiang</b>, Ting-Zhu Huang, Xi-Le Zhao, Liang-Jian Deng, Yao Wang</span>
+              <span class="pub-venue"><b>IEEE Transactions on Image Processing</b>, 2019.</span>
+              <div class="pub-actions">
+                <a href="paper/2019/FastDeRain_%20A%20Novel%20Video%20Rain%20Streak%20Removal%20Method%20Using%20Directional%20Gradient%20Priors.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <a href="https://github.com/TaiXiangJiang/FastDeRain" class="pub-link" target="_blank">[Matlab Demo]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2019-1" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2019-1" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2019-1" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{Jiang2019_FastDeRain,
+  author  = {Jiang, Tai{-}Xiang and Huang, Ting{-}Zhu and Zhao, Xi{-}Le and Deng, Liang{-}Jian and Wang, Yao},
+  title   = {FastDeRain: A Novel Video Rain Streak Removal Method Using Directional Gradient Priors},
+  journal = {IEEE Transactions on Image Processing},
+  year    = {2019}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <li class="pub-item">
+              <div class="pub-title">Low-Rank Tensor Completion via Smooth Matrix Factorization</div>
+              <span class="pub-authors">Yu-Bang Zheng, Ting-Zhu Huang, Teng-Yu Ji, Xi-Le Zhao, <b>Tai-Xiang Jiang</b>, Tian-Hui Ma</span>
+              <span class="pub-venue"><b>Applied Mathematical Modelling</b>, 2019.</span>
+              <div class="pub-actions">
+                <a href="paper/2019/Low-rank%20tensor%20completion%20via%20smooth%20matrix%20factorization.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <a href="https://github.com/zhaoxile/Low-rank-tensor-completion-via-smooth-matrix-factorization" class="pub-link" target="_blank">[Matlab Demo]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2019-2" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2019-2" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2019-2" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{Zheng2019_SmoothMF,
+  author  = {Zheng, Yu{-}Bang and Huang, Ting{-}Zhu and Ji, Teng{-}Yu and Zhao, Xi{-}Le and Jiang, Tai{-}Xiang and Ma, Tian{-}Hui},
+  title   = {Low-Rank Tensor Completion via Smooth Matrix Factorization},
+  journal = {Applied Mathematical Modelling},
+  year    = {2019}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <li class="pub-item">
+              <div class="pub-title">Low-Rank Tensor Completion via Combined Non-Local Self-Similarity and Low-Rank Regularization</div>
+              <span class="pub-authors">Xiao-Tong Li, Xi-Le Zhao, <b>Tai-Xiang Jiang</b>, Yu-Bang Zheng, Teng-Yu Ji, Ting-Zhu Huang</span>
+              <span class="pub-venue"><b>Neurocomputing</b>, 2019.</span>
+              <div class="pub-actions">
+                <a href="paper/2019/Low-rank%20tensor%20completion%20via%20combined%20non-local%20self-similarity%20and%20low-rank%20regularization.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <a href="https://github.com/zhaoxile/Low-rank-tensor-completion-via-combined-non-local-self-similarity-and-low-rank-regularization" class="pub-link" target="_blank">[Matlab Demo]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2019-3" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2019-3" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2019-3" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{Li2019_NLSS_TensorCompletion,
+  author  = {Li, Xiao{-}Tong and Zhao, Xi{-}Le and Jiang, Tai{-}Xiang and Zheng, Yu{-}Bang and Ji, Teng{-}Yu and Huang, Ting{-}Zhu},
+  title   = {Low-Rank Tensor Completion via Combined Non-Local Self-Similarity and Low-Rank Regularization},
+  journal = {Neurocomputing},
+  year    = {2019}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <li class="pub-item">
+              <div class="pub-title">A Total Variation and Group Sparsity based Tensor Optimization Model for Video Rain Streak Removal</div>
+              <span class="pub-authors">Ye-Tao Wang, Xi-Le Zhao*, <b>Tai-Xiang Jiang*</b>, Liang-Jian Deng, Tian-Hui Ma, Yue-Tian Zhang, Ting-Zhu Huang</span>
+              <span class="pub-venue"><b>Signal Processing: Image Communication</b>, 2019.</span>
+              <div class="pub-actions">
+                <a href="paper/2019/A%20Total%20Variation%20and%20Group%20Sparsity%20based%20Tensor%20Optimization%20Model%20for%20Video%20Rain%20Streak%20Removal.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <a href="https://github.com/zhaoxile/TVGS-Rain-Removal" class="pub-link" target="_blank">[Matlab Demo]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2019-4" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2019-4" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2019-4" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{Wang2019_TVGroupRain,
+  author  = {Wang, Ye{-}Tao and Zhao, Xi{-}Le and Jiang, Tai{-}Xiang and Deng, Liang{-}Jian and Ma, Tian{-}Hui and Zhang, Yue{-}Tian and Huang, Ting{-}Zhu},
+  title   = {A Total Variation and Group Sparsity Based Tensor Optimization Model for Video Rain Streak Removal},
+  journal = {Signal Processing: Image Communication},
+  year    = {2019}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+          </ul>
+
+          <!-- 2018 -->
+          <h3 class="pub-year-heading">2018</h3>
+          <ul class="pub-list">
+            <li class="pub-item">
+              <div class="pub-title">Adaptive hyperspectral mixed noise removal</div>
+              <span class="pub-authors"><b>Tai-Xiang Jiang</b>, Lina Zhuang, Ting-Zhu Huang, José M Bioucas-Dias</span>
+              <span class="pub-venue"><b>IEEE International Geoscience and Remote Sensing Symposium (IGARSS)</b>, 2018.</span>
+              <div class="pub-actions">
+                <a href="https://TaiXiangJiang.github.io/paper/2018/igarss2018.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2018-1" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2018-1" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2018-1" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@inproceedings{Jiang2018_IGARSS_AdaptiveHSI,
+  author    = {Jiang, Tai{-}Xiang and Zhuang, Lina and Huang, Ting{-}Zhu and Bioucas{-}Dias, Jos{\'e} M.},
+  title     = {Adaptive Hyperspectral Mixed Noise Removal},
+  booktitle = {2018 IEEE International Geoscience and Remote Sensing Symposium (IGARSS)},
+  year      = {2018}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <li class="pub-item">
+              <div class="pub-title">A Directional Global Sparse Model for Single Image Rain Removal</div>
+              <span class="pub-authors">Liang-Jian Deng, Ting-Zhu Huang, Xi-Le Zhao, <b>Tai-Xiang Jiang</b></span>
+              <span class="pub-venue"><b>Applied Mathematical Modelling</b>, 2018.</span>
+              <div class="pub-actions">
+                <a href="paper/2018/A%20directional%20global%20sparse%20model%20for%20single%20image%20rain%20removal.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <a href="https://liangjiandeng.github.io/papers/2018/UGSM_v3.0.zip" class="pub-link" target="_blank">[Matlab Demo]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2018-2" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2018-2" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2018-2" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{Deng2018_DirectionalSparseRain,
+  author  = {Deng, Liang{-}Jian and Huang, Ting{-}Zhu and Zhao, Xi{-}Le and Jiang, Tai{-}Xiang},
+  title   = {A Directional Global Sparse Model for Single Image Rain Removal},
+  journal = {Applied Mathematical Modelling},
+  year    = {2018}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+            <li class="pub-item">
+              <div class="pub-title">Matrix factorization for low-rank tensor completion using framelet prior</div>
+              <span class="pub-authors"><b>Tai-Xiang Jiang</b>, Ting-Zhu Huang, Xi-Le Zhao, Teng-Yu Ji, Liang-Jian Deng</span>
+              <span class="pub-venue"><b>Information Sciences</b>, 2018.</span>
+              <div class="pub-actions">
+                <a href="paper/2018/Matrix%20factorization%20for%20low-rank%20tensor%20completion%20using%20framelet%20prior.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <a href="https://github.com/uestctensorgroup/code_MF_Framelet" class="pub-link" target="_blank">[Matlab Demo]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2018-3" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2018-3" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2018-3" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@article{Jiang2018_MFFramelet,
+  author  = {Jiang, Tai{-}Xiang and Huang, Ting{-}Zhu and Zhao, Xi{-}Le and Ji, Teng{-}Yu and Deng, Liang{-}Jian},
+  title   = {Matrix Factorization for Low-Rank Tensor Completion Using Framelet Prior},
+  journal = {Information Sciences},
+  year    = {2018}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+          </ul>
+
+          <!-- 2017 -->
+          <h3 class="pub-year-heading">2017</h3>
+          <ul class="pub-list">
+            <li class="pub-item">
+              <div class="pub-title">A Novel Tensor-based Video Rain Streaks Removal Approach via Utilizing Discriminatively Intrinsic Priors</div>
+              <span class="pub-authors"><b>Tai-Xiang Jiang</b>, Ting-Zhu Huang, Xi-Le Zhao, Liang-Jian Deng, Yao Wang</span>
+              <span class="pub-venue"><b>IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</b>, 2017.</span>
+              <div class="pub-actions">
+                <a href="paper/2017/A%20Novel%20Tensor-Based%20Video%20Rain%20Streaks%20Removal%20Approach%20via%20Utilizing%20Discriminatively%20Intrinsic%20Priors.pdf" class="pub-link" target="_blank">[PDF]</a>
+                <a href="https://openaccess.thecvf.com/content_cvpr_2017/supplemental/Jiang_A_Novel_Tensor-Based_2017_CVPR_supplemental.pdf" class="pub-link" target="_blank">[Supp]</a>
+                <a href="https://drive.google.com/file/d/1Y4s2o78VACU580XhA_ZsPHR5O0WxWnu7/view" class="pub-link" target="_blank">[Poster]</a>
+                <a href="https://github.com/TaiXiangJiang/FastDeRain" class="pub-link" target="_blank">[Matlab Demo]</a>
+                <button class="bibtex-toggle bibtex-btn" data-target="bib-2017-1" aria-expanded="false">BibTeX</button>
+              </div>
+              <div class="bibtex-panel" id="bib-2017-1" aria-hidden="true">
+                <button class="bibtex-copy" data-source="bib-2017-1" title="Copy to clipboard">Copy</button>
+                <pre class="bibtex-content">
+@inproceedings{Jiang2017_TensorVideoRain,
+  author    = {Jiang, Tai{-}Xiang and Huang, Ting{-}Zhu and Zhao, Xi{-}Le and Deng, Liang{-}Jian and Wang, Yao},
+  title     = {A Novel Tensor-based Video Rain Streaks Removal Approach via Utilizing Discriminatively Intrinsic Priors},
+  booktitle = {IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2017}
+}
+                </pre>
+                <span class="bibtex-status"></span>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Fundings -->
+        <section id="fundings" class="glass-card rounded-2xl p-6 md:p-8">
+          <h2 class="section-heading">
+            <span>Fundings</span>
+            <span class="section-tag">GRANTS</span>
+          </h2>
+          <ul class="funding-list list-disc list-inside space-y-2 text-slate-700">
+            <li>
+              Fundamental Research Funds for the Central Universities, PI (中央高校基本科研业务费, 主持), 2020, 2021.
+            </li>
+            <li>
+              National Natural Science Foundation of China, Youth Program, PI (国家自然科学基金青年项目, NSFC 12001446, 主持), 2021–2023.
+            </li>
+            <li>
+              National Natural Science Foundation of China, General Program, Participant (国家自然科学面上项目, 参与), 2018–2021, 2019–2022, 2022–2025.
+            </li>
+          </ul>
+        </section>
+
+      </div> <!-- / End Left Main Column -->
+
+      <!-- 右侧边栏 (1/3) -->
+      <aside class="lg:col-span-1 flex flex-col gap-8">
+
+        <!-- Academic Activities -->
+        <section id="activities" class="glass-card rounded-2xl p-6 md:p-8">
+          <h2 class="section-heading">
+            <span>Academic Activities</span>
+            <span class="section-tag">SERVICE</span>
+          </h2>
+          
+          <h3 class="text-lg font-semibold text-slate-800 mb-2 mt-4">Journal Reviewer</h3>
+          <div class="text-sm text-slate-600 space-y-1">
+            <p>International Journal of Computer Vision</p>
+            <p>IEEE Transactions on Cybernetics</p>
+            <p>IEEE Transactions on Image Processing</p>
+            <p>IEEE Transactions on Signal Processing</p>
+            <p>IEEE Transactions on Geoscience and Remote Sensing</p>
+            <p>IEEE Transactions on Neural Networks and Learning Systems</p>
+            <p>IEEE Transactions on Pattern Analysis and Machine Intelligence</p>
+            <p>IEEE Transactions on Circuits and Systems for Video Technology</p>
+            <p>IEEE Journal of Selected Topics in Signal Processing</p>
+            <p>IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing</p>
+            <p>IEEE Signal Processing Letters</p>
+            <p>IEEE Access</p>
+            <p>Neurocomputing</p>
+            <p>Pattern Recognition</p>
+            <p>Applied Mathematical Modeling</p>
+            <p>Journal of Scientific Computing</p>
+            <p>Signal Processing: Image Communication</p>
+          </div>
+
+          <h3 class="text-lg font-semibold text-slate-800 mb-2 mt-6">Conference Reviewer</h3>
+          <div class="text-sm text-slate-600 space-y-1">
+            <p>CVPR&nbsp;2021, 2022</p>
+            <p>ICCV&nbsp;2021</p>
+            <p>ICME&nbsp;2021</p>
+          </div>
+        </section>
+
+        <!-- Awards -->
+        <section id="awards" class="glass-card rounded-2xl p-6 md:p-8">
+          <h2 class="section-heading">
+            <span>Awards</span>
+            <span class="section-tag">HONORS</span>
+          </h2>
+          <div class="award-list space-y-3 mt-4">
+            <div class="award-item">2024&nbsp;&nbsp;<b>Sichuan Provincial Science and Technology Award (Natural Science), Third Prize</b></div>
+            <div class="award-item">2024&nbsp;&nbsp;<b>Liu Shibai Research Excellence Fund Award, Second Prize</b></div>
+            <div class="award-item">2024&nbsp;&nbsp;<b>Huawei Technical Cooperation Achievement Transformation Award, Second Prize</b></div>
+            <div class="award-item">2023&nbsp;&nbsp;<b>Second Applied Mathematics Award of Sichuan Mathematical Society, First Prize</b></div>
+            <div class="award-item">2022&nbsp;&nbsp;<b>Sichuan Computer Science and Technology Award, First Prize</b> (<a href="http://www.spcf.cn/index.php?r=article/view&id=472" target="_blank" class="section-link">Link</a>)</div>
+            <div class="award-item">2020&nbsp;&nbsp;<b>Excellent Paper Award of the First Sichuan–Chongqing Science and Technology Conference, First Prize</b> (<a href="https://www.scsssa.org.cn/info/448e0e61922a413bb5565a2e2648e382" target="_blank" class="section-link">Link</a>,&nbsp;<a href="http://kjb.sckjw.com.cn/m/7214a450ad7b4e28831b03fdf7031bf2#10006-weixin-1-52626-6b3bffd01fdde4900130bc5a2751b6d1" target="_blank" class="section-link">News</a>)</div>
+            <div class="award-item">2019&nbsp;&nbsp;<b>Ninth Computational Mathematics Excellent Young Paper Award, Second Prize</b> (<a href="http://cscm.cc.ac.cn/chinese/qnlwj9.htm" target="_blank" class="section-link">Link</a>)</div>
+            <div class="award-item">2019&nbsp;&nbsp;<b>Outstanding Student of UESTC 成电杰出学生 (Graduate Student)</b> (highest personal honor for graduate students in UESTC, <a href="https://news.uestc.edu.cn/?n=UestcNews.Front.Document.ArticlePage&Id=68385" target="_blank" class="section-link">Link</a>)</div>
+            <div class="award-item">2019&nbsp;&nbsp;<b>National Scholarship</b> (highest nationwide scholarship for students in China)</div>
+          </div>
+          <style>
+            .award-item {
+              background-color: #f8fafc; /* slate-50 */
+              border: 1px solid #e2e8f0; /* slate-200 */
+              padding: 0.6rem 0.8rem;
+              border-radius: 0.5rem;
+              font-size: 0.9rem;
+              color: #334155; /* slate-700 */
+            }
+          </style>
+        </section>
+
+        <!-- Visitors -->
+        <section id="visitors" class="glass-card rounded-2xl p-6 md:p-8">
+          <h2 class="section-heading">
+            <span>Visitors</span>
+            <span class="section-tag">STATS</span>
+          </h2>
+          <div class="text-center mt-4">
+            <div style="width: 300px; max-width: 100%; margin: 0 auto;">
+              <script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=51ldn1fwksc&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;f=arial&amp;l=33" async="async"></script>
+            </div>
+          </div>
+        </section>
+
+      </aside> <!-- / End Right Sidebar -->
+
+    </main>
+    
+    <!-- 统一的 Section 样式 -->
+    <style>
+      .section-heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.75rem; /* 2xl */
+        font-weight: 700; /* bold */
+        color: #1e293b; /* slate-800 */
+        border-bottom: 1px solid #e2e8f0; /* slate-200 */
+        padding-bottom: 0.75rem;
+        margin-bottom: 1.25rem;
+      }
+      .section-tag {
+        font-size: 0.75rem; /* xs */
+        font-weight: 500;
+        background-color: #eef2ff; /* indigo-50 */
+        color: #3730a3; /* indigo-800 */
+        padding: 0.25rem 0.75rem;
+        border-radius: 999px;
+        letter-spacing: 0.05em;
+      }
+      .section-link {
+        font-weight: 500;
+        color: #0f766e; /* teal-700 */
+        transition: color 0.2s ease;
+      }
+      .section-link:hover {
+        color: #0d9488; /* teal-600 */
+      }
+      .chip {
+        background-color: #f0fdfa; /* teal-50 */
+        color: #115e59; /* teal-800 */
+        padding: 0.25rem 0.75rem;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        border: 1px solid #ccfbf1; /* teal-100 */
+      }
+    </style>
+
+    <!-- 统一的 Publication 样式 -->
+    <style>
+      .pub-year-heading {
+        font-size: 1.5rem; /* xl */
+        font-weight: 600; /* semibold */
+        color: #334155; /* slate-700 */
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid #e2e8f0; /* slate-200 */
+      }
+      .pub-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; /* 间距 */
+      }
+      .pub-item {
+        background-color: #ffffff; /* white */
+        border-radius: 0.75rem; /* xl */
+        padding: 1.1rem;
+        border: 1px solid #e2e8f0; /* slate-200 */
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.03), 0 2px 4px -2px rgb(0 0 0 / 0.03); /* shadow-sm-soft */
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem; /* 标题、作者、刊物之间的间距 */
+        transition: all 0.2s ease;
+      }
+      .pub-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05); /* shadow-md */
+        border-color: #cbd5e1; /* slate-300 */
+      }
+      .pub-actions {
+        margin-top: 0.75rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        align-items: center;
+      }
+      .pub-link, .bibtex-btn {
+        text-decoration: none;
+        font-size: 0.8rem;
+        font-weight: 500;
+        background-color: #f8fafc; /* slate-50 */
+        color: #334155; /* slate-700 */
+        border: 1px solid #cbd5e1; /* slate-300 */
+        padding: 0.25rem 0.75rem;
+        border-radius: 999px;
+        transition: all 0.2s ease;
+        cursor: pointer;
+      }
+      .pub-link:hover, .bibtex-btn:hover {
+        background-color: #f1f5f9; /* slate-100 */
+        border-color: #94a3b8; /* slate-400 */
+        color: #0f172a; /* slate-900 */
+      }
+      .bibtex-panel {
+        margin-top: 0.75rem;
+        padding: 0.75rem 1rem;
+        background-color: #f1f5f9; /* slate-100 */
+        border-radius: 0.5rem; /* lg */
+        border: 1px solid #e2e8f0; /* slate-200 */
+        position: relative;
+      }
+      .bibtex-copy {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+        background-color: #ffffff;
+        color: #334155; /* slate-700 */
+        border: 1px solid #cbd5e1; /* slate-300 */
+        padding: 0.15rem 0.6rem;
+        border-radius: 999px;
+        transition: all 0.2s ease;
+        cursor: pointer;
+      }
+      .bibtex-copy:hover {
+        background-color: #f8fafc; /* slate-50 */
+      }
+      .bibtex-status {
+        display: inline-block;
+        margin-left: 0.5rem;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: #16a34a; /* green-600 */
+      }
+    </style>
+
+    <!-- ** 页脚 ** -->
+    <footer class="mt-12 text-center text-sm text-slate-500 border-t border-slate-200 pt-8">
+      <div><span id="lastModified">Loading last update time...</span></div>
+      <div style="margin-top:4px;">
+        &copy; Tai-Xiang Jiang. All rights reserved.
+      </div>
+    </footer>
+
+  </div> <!-- / End Page Container -->
+
+  <!-- ** 脚本（移动到 body 底部） ** -->
+
+  <!-- 最后更新时间 -->
+  <script type="text/javascript">
+    window.addEventListener('load', function () {
+      try {
+        var el = document.getElementById("lastModified");
+        if (el) {
+          var lastModDate = document.lastModified.split(" ")[0];
+          if (lastModDate) {
+            el.innerHTML = "Last update: " + lastModDate;
+          } else {
+            el.innerHTML = "Last update: " + new Date().toLocaleDateString();
+          }
+        }
+      } catch (e) {
+        console.error("Could not set last modified date:", e);
+        var el = document.getElementById("lastModified");
+        if(el) el.innerHTML = "Page loaded: " + new Date().toLocaleDateString();
+      }
+    });
+  </script>
+
+  <!-- BibTeX 展开/收起 + 一键复制 -->
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+      
+      // 1. 展开/收起 BibTeX 面板
+      document.querySelectorAll('.bibtex-toggle').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var targetId = btn.getAttribute('data-target');
+          var panel = document.getElementById(targetId);
+          if (!panel) return;
+
+          var isOpen = panel.classList.toggle('open');
+          btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          btn.textContent = isOpen ? 'Close BibTeX' : 'BibTeX';
+        });
+      });
+
+      // 2. 一键复制 BibTeX
+      document.querySelectorAll('.bibtex-copy').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var panelId = btn.getAttribute('data-source');
+          var panel = document.getElementById(panelId);
+          if (!panel) return;
+          
+          var pre = panel.querySelector('.bibtex-content');
+          if (!pre) return;
+
+          var text = pre.textContent.trim();
+          var status = panel.querySelector('.bibtex-status');
+
+          // 显示状态消息
+          function showStatus(msg, isError) {
+            if (!status) return;
+            status.textContent = msg;
+            status.style.color = isError ? '#dc2626' : '#16a34a'; // red-600 or green-600
+            btn.textContent = msg;
+            setTimeout(function () { 
+              status.textContent = ''; 
+              btn.textContent = 'Copy';
+            }, 2000);
+          }
+
+          // 优先使用现代 Clipboard API
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text)
+              .then(function () { showStatus('Copied!', false); })
+              .catch(function (err) { 
+                console.error('Clipboard API failed:', err);
+                fallbackCopy(text); // 失败时尝试降级
+              });
+          } else {
+            fallbackCopy(text); // 降级
+          }
+
+          // 降级方案 (用于 http 或旧浏览器)
+          function fallbackCopy(textToCopy) {
+            var textarea = document.createElement('textarea');
+            textarea.value = textToCopy;
+            textarea.style.position = 'fixed'; // 防止页面滚动
+            textarea.style.top = '0';
+            textarea.style.left = '0';
+            textarea.style.opacity = '0'; // 透明
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+            try {
+              var ok = document.execCommand('copy');
+              showStatus(ok ? 'Copied!' : 'Copy failed', !ok);
+            } catch (e) {
+              console.error('execCommand failed:', e);
+              showStatus('Copy failed', true);
+            }
+            document.body.removeChild(textarea);
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

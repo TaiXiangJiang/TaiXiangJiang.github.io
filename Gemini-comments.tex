@@ -1,0 +1,148 @@
+1. **Summary of the Paper**
+   **a)** The paper addresses hyperspectral–multispectral image fusion (HSI–MSI fusion) and proposes a “Deep Generalized Linear Mixed Model” (D-GLMM) framework that decomposes an interpolated LR-HSI into a learned “abundance” dictionary and an “endmember” coefficient matrix, solves the coefficients in closed form via a least-squares–type expression, and then iteratively refines both dictionary and coefficients using Transformer-based modules guided by the HR-MSI.  The authors claim that injecting MSI information into this endmember/abundance space improves spectral fidelity and efficiency, and they train and evaluate the model on three standard datasets (CAVE, Chikusei, IEEE GRSS 2018) using PSNR, ERGAS, RASE and SAM.  Across these datasets, the proposed method achieves the best or near-best PSNR and SAM compared with deep-learning baselines such as PNN, MSDCNN, SSR, TFNet, MoG-DCN, PSRT and DCTransformer (DCT), typically improving PSNR by ~0.4–1.3 dB over the strongest competitor while maintaining a small parameter count (<0.2M) and low FLOPs according to the provided efficiency plot.
+
+---
+
+2. **Evaluation of Contribution and Novelty**
+   **a)** Conceptually, the work positions itself at the intersection of model-based unmixing (generalized linear mixed / linear mixing models) and deep unfolding for HSI–MSI fusion: the network alternates between (i) learning a low-dimensional dictionary from an interpolated HSI, (ii) solving a closed-form linear system for coefficients, and (iii) refining both using Transformer-based modules that accept MSI guidance.  Similar optimization-inspired deep networks and mixed-model formulations already exist for HS–MS fusion (e.g., MHF-Net, DBIN, MoG-DCN, PSRT, DCTransformer, HMFT, BDT, diffusion-based DDPM-Fus, HyFusion, KANDiff, etc.), many of which also explicitly model physical imaging and/or perform cross-modal feature interaction. ([ResearchGate][1]) The main novelty here lies in how the LS closed-form is embedded in the network and in the specific “coarse-to-fine” two-stage decomposition (solving vs. fusion) plus MSI injection into the dictionary space; however, these ideas are structurally close to existing deep-unrolled/model-guided fusion frameworks. Overall, the contribution seems incremental rather than fundamentally new, though the combination of relatively compact architecture and good quantitative performance is practically interesting.
+
+---
+
+3. **Weaknesses and Questions for Improvement**
+
+### 3.a) Questions on Motivation (each question one paragraph)
+
+**(M1)** The paper motivates the work by stating that direct feature or image-level injection of MSI into HSI leads to spectral distortion and low efficiency, and that high-dimensional HSIs exhibit spectral redundancy that is not well exploited by existing deep methods.  However, a large body of recent HS–MS fusion work is explicitly subspace- or redundancy-aware (tensor models, low-rank factorization, subspace priors, and many Transformer or diffusion-based networks that operate on reduced spectral spaces). ([Taylor & Francis Online][2]) It is suggested to more clearly position which specific limitations of these prior redundancy-aware or model-based methods (e.g., MoG-DCN, PSRT, DCTransformer, HMFT, BDT, HyFusion, diffusion-based DDPM-Fus/KANDiff/RSST) remain unaddressed and why the proposed GLMM-style decomposition offers a qualitatively different advantage instead of being another variant of deep unfolding.
+
+**(M2)** The authors argue that the generalized linear mixed model (abundance–endmember decomposition) offers better interpretability, yet the method does not seem to enforce key physical constraints (e.g., non-negativity and sum-to-one constraints on abundances, positivity of endmembers, or explicit separation between spectral signatures and proportions).  It is suggested to clarify how “interpretability” is defined here and to what extent the learned dictionary and coefficient matrices actually correspond to physically meaningful endmembers and abundances in practice (e.g., via analysis of atom spectra or unmixing-like experiments).
+
+**(M3)** The adoption of a purely linear mixing model is not justified in light of the known nonlinear mixing effects in complex remote sensing scenes (multiple scattering, topography, adjacency effects), which the introduction itself briefly acknowledges when criticizing traditional linear methods.  It is suggested to explain why a linear GLMM-based decomposition remains adequate in the proposed architecture, or to discuss whether the deep refinement blocks are expected to implicitly compensate for nonlinearities and how this differs from existing nonlinear or Transformer-based fusion networks.
+
+**(M4)** The paper repeatedly emphasizes “incomplete information fusion tasks” as a central motivation but does not precisely formalize this notion (e.g., in terms of unknown sensor responses, spectral response mismatch, or missing spectral bands).  It is suggested to provide a clearer problem statement—for example, whether the setting assumes known sensor degradations, strictly simulated MS bands from HSI, or realistic unknown degradation; and then to argue why the proposed architecture is particularly suitable to this regime compared with recent blind or implicit-degradation methods. ([科学直接][3])
+
+**(M5)** The motivation for calling the method “deep generalized linear mixed model” is somewhat confusing, because in statistics GLMMs typically refer to generalized linear models with random effects rather than dictionary-learning–style factorizations. Here the formulation is closer to linear mixing / matrix factorization with a deep unfolding flavor.  It is suggested to better align the terminology with established statistical definitions or clearly explain in what sense the “mixed” nature (e.g., random effects, hierarchical structure) is being captured beyond standard linear unmixing.
+
+---
+
+### 3.b) Questions on Methodology (each question one paragraph)
+
+**(Me1)** There is a conceptual inconsistency in how “abundance” and “endmember” are defined and mapped to the matrices (D) and (\lambda): in Section II-A, the paper states that “the dictionary is equivalent to the abundance matrix, while the coefficients are equivalent to an endmember matrix,”  whereas later it says “the abundance matrix … can represent spectral characteristics, while the corresponding endmember matrix represents the proportion of these spectral features,” which reverses the conventional physical interpretation of endmembers (spectral signatures) and abundances (mixture proportions).  It is suggested to carefully reconcile this mapping, stick to a consistent notation matching the unmixing literature, and clarify how physical meanings are preserved when MSI is injected into this space.
+
+**(Me2)** The solving stage computes the coefficient matrix (\lambda) via a closed-form linear system (\lambda = (D^T D + \alpha I)^{-1} D^T I_{HR}) (Eq. (10)/(12)), with (D) of size (HW \times m) per image and (m) between (n) and (N).   It is suggested to detail how this inversion is implemented in practice (e.g., batch-wise Cholesky, shared across spatial positions, approximate solvers, numerical stability strategies) and provide complexity bounds and memory usage per stage, since repeatedly inverting an (m\times m) matrix for each sub-network (and possibly each batch) may be nontrivial for larger m or d.
+
+**(Me3)** The fusion stage refines (\lambda) via a 1D Transformer and updates (D) by passing (\text{concat}(D^k, I_{ms})) through a pyramid shuffle-and-reshuffle Transformer, then adding back (D^k) residually.  However, there is no explicit constraint ensuring that the updated dictionary (D^{k+1}) remains compatible with a linear mixing model for both HSI and MSI (e.g., via known spectral response matrices). It is suggested to clarify whether any additional constraints, normalization, or regularizers are used to keep (D^{k+1}) physically consistent, and to discuss whether direct concatenation with MSI might break the assumed shared endmember space.
+
+**(Me4)** The method relies on bicubic interpolation of the LR-HSI to form the initial (I_{HR}^0) used in the solving stage.  Bicubic interpolation is known to introduce aliasing and blur in high-frequency regions, which might bias the LS solution of (\lambda). It is suggested to explain why bicubic interpolation is preferred over more sophisticated degradation-aware initializations (e.g., using known degradation operators or learned upsampling) and to analyze how sensitive the method is to the choice of interpolation in terms of both convergence and final performance.
+
+**(Me5)** The loss function is a straightforward L2 reconstruction loss between the final stage fusion output and the ground-truth HR-HSI.  Given the claimed emphasis on spectral fidelity and interpretability, it is somewhat surprising that no additional spectral or physical regularization (e.g., SAM-based loss, abundance sparsity, non-negativity, sum-to-one constraints) is incorporated. It is suggested to discuss why pure L2 is sufficient, provide ablation results for potential spectral/structural regularizers, and comment on whether such constraints could further enhance interpretability.
+
+**(Me6)** The architecture uses “pyramid shuffle-and-reshuffle Transformer” blocks as the dictionary encoder and MSI–dictionary refinement module, but the paper largely cites PSRT [44] for details.   It is suggested to provide at least a concise architectural description and hyperparameters specific to this work (e.g., number of SaR blocks, window sizes, embedding dimensions), and to indicate which parts are adopted directly from PSRT and which are novel adaptations for the proposed GLMM framework.
+
+**(Me7)** The number of stacked sub-networks (d) and dictionary dimension (m) are important design parameters and appear in Figures 8 and 9, but the text briefly states that “m between n and N” without a principled selection rule.   It is suggested to present a more systematic analysis of the trade-off between (m), (d), performance, and complexity, and to explain whether these hyperparameters were tuned per dataset or fixed globally.
+
+**(Me8)** The ablation table (Table IV) compares variants with/without solving and fusion modules, but the “baseline with both modules removed” is not described architecturally and the loss of ~19 dB PSNR when removing fusion suggests that the baseline is extremely weak.  It is suggested to clearly define what network architecture corresponds to each ablation row, and to include stronger baselines such as a pure PSRT/DCT-like network with similar parameter count to better isolate the contribution of the GLMM-style alternating structure.
+
+---
+
+4. **Evaluation of Experiments**
+
+**(E1)** The authors evaluate the method on three widely used datasets: CAVE (laboratory scenes), IEEE GRSS 2018 (urban remote sensing), and Chikusei (complex agricultural/urban airborne imagery), using standard metrics PSNR, ERGAS, RASE, and SAM.  On CAVE and IEEE, the proposed method consistently outperforms all compared approaches (including MoG-DCN, PSRT, and DCT) in PSNR and often in ERGAS/RASE/SAM as well, with gains up to ~1.3 dB over DCT on IEEE.  On Chikusei, it achieves the best PSNR and SAM but has slightly worse ERGAS/RASE than DCT, which is correctly acknowledged in the text.  The visual error maps qualitatively show smoother and darker errors for the proposed method, especially in high-frequency edges and complex regions.  Overall, the experimental evidence presented does support the claim that the method is competitive and often superior to the chosen baselines on these simulated datasets.
+
+**(E2)** However, the comparison set, while including strong methods like MoG-DCN, PSRT, and DCT, appears incomplete relative to the rapidly evolving SOTA in HS–MS fusion. Recent Transformer-based networks (e.g., HMFT, BDT, DCTransformer, RSST, HyFusion) and generative/diffusion-based methods (e.g., DDPM-Fus, KANDiff, other self-learning or implicit Transformer architectures) are not included, even though some of them are similar in spirit (optimization-inspired or Transformer-heavy) and predate or coincide with this work. ([PMC][4]) It is suggested to add comparisons (or at least a detailed discussion) with these more recent SOTA methods, particularly those that also emphasize interpretability, efficiency, or physical modeling, to make the SOTA claim more convincing.
+
+**(E3)** The paper treats all experiments as supervised with known HR-HSIs as ground truth, while in many real-world remote sensing scenarios no HR-HSI ground truth is available and unsupervised or self-supervised methods are needed. ([MDPI][5]) It is suggested to either evaluate the method in a more realistic unsupervised/blind setting (e.g., using only LR-HSI and HR-MSI with unknown response functions) or to clearly delimit the scope of applicability of the proposed approach to supervised/simulated benchmarks.
+
+**(E4)** It is not fully clear whether the degradations (down-sampling, spectral response) used to generate LR-HSI and MSI from HR-HSI precisely follow the imaging models assumed by all compared methods, and whether each baseline is configured according to its original recommended degradation model. It is suggested to provide explicit formulas for spatial/spectral degradation used in each dataset and to discuss fairness—especially for model-based methods that rely heavily on known point spread functions or sensor response curves.
+
+**(E5)** The ablation and efficiency analyses are helpful—Table IV demonstrates the necessity of both solving and fusion stages, while Fig. 10 shows that the proposed method lies in a favorable region of high PSNR with low FLOPs and parameter count.   However, there is no reporting of actual wall-clock runtime, memory consumption, or robustness to input size, and the FLOPs/parameter estimates for baselines may depend on implementation details. It is suggested to add runtime comparisons on a common hardware platform and to clarify how FLOPs and parameter counts were computed for all methods.
+
+**(E6)** The quantitative tables for CAVE, IEEE, and Chikusei report single PSNR/ERGAS/RASE/SAM numbers without standard deviations or statistical tests.   It is suggested to provide mean ± standard deviation over all scenes and perhaps per-scene breakdowns (or boxplots), which would help assess the robustness of improvements and whether the observed gains are consistent rather than dominated by a few easy cases.
+
+---
+
+5. **Additional Minor Comments**
+
+5.a) **Minor comments / clarifications (each in a single sentence)**
+
+1. It is suggested to fix the repeated typo “qantitative” → “quantitative” in the captions of Tables I–III.
+2. It is suggested to correct “MOG PRST DCT Our” in Fig. 4/5 labels to “MoG PSRT DCT Ours” for consistency.
+3. It is suggested to standardize the terminology between “HS-MS”, “MHIF”, “HSI-MSI fusion”, and “hyperspectral-multispectral” throughout the manuscript.
+4. It is suggested to revise phrases like “belongs to incomplete information fusion tasks” and “deep generalized linear mixed framework” to more natural English expressions.
+5. It is suggested to clearly indicate whether all experiments use the same number of stages (d) and dictionary size (m), and to list those values near the beginning of Section IV.
+6. It is suggested to check equation (8)–(9) for notational consistency (e.g., use either (\lambda) or (\alpha) consistently for the variable of differentiation and avoid misprints like (D\alpha)).
+7. It is suggested to ensure that matrix dimensions (e.g., (B, H, W, m, N)) are consistently ordered and that reshaping operations are always clearly specified.
+8. It is suggested to move some long qualitative descriptions (e.g., paragraphs about specific dataset characteristics and error-map interpretations) to supplementary material or condense them for improved readability.
+9. It is suggested to add citations when discussing recent Transformer or diffusion-based HS–MS fusion methods to give a more up-to-date overview in the Related Work section. ([PMC][4])
+10. It is suggested to double-check all reference formatting and URLs (e.g., GitHub link in the abstract) to ensure they are valid and properly formatted according to TNNLS style.
+
+---
+
+## Final Two-Part Summary
+
+### [Part 1] Concise Single-Paragraph Summary
+
+This paper proposes a deep optimization-inspired framework for hyperspectral–multispectral image fusion that treats an interpolated LR-HSI as a product of a learned low-dimensional dictionary (“abundance”) and an endmember coefficient matrix, solves the coefficients via a closed-form least-squares expression, and iteratively refines both dictionary and coefficients with Transformer-based modules guided by the HR-MSI.  The resulting Deep Generalized Linear Mixed Model (D-GLMM) is evaluated on CAVE, IEEE GRSS 2018, and Chikusei datasets, showing improved or competitive PSNR, ERGAS, RASE, and SAM compared to several deep-learning baselines (PNN, MSDCNN, SSR, TFNet, MoG-DCN, PSRT, DCT) while maintaining low parameter count and FLOPs, and the authors argue that this design yields both improved efficiency and interpretability.
+
+---
+
+### [Part 2] Comments
+
+#### 1. Single-Paragraph Evaluation of Contribution / Novelty
+
+The work contributes an optimization-unfolding–style architecture that explicitly embeds a closed-form linear mixing solution into a deep network and alternates between solving and fusion stages, with MSI information injected into a dictionary/endmember space, which is an interesting combination of classical linear unmixing and modern Transformer blocks.  However, many recent HS–MS fusion methods already follow similar patterns of model-guided deep unfolding, subspace factorization, and Transformer-based cross-modal interaction or generative modeling (e.g., MoG-DCN, PSRT, DCTransformer, HMFT, BDT, various diffusion-based and self-learning approaches), and the paper does not adequately differentiate itself from these in either modeling assumptions or experimental comparisons, so the overall novelty appears moderate and largely incremental rather than paradigm-shifting. ([ResearchGate][1])
+
+#### 2. Questions on Motivation (each question one paragraph)
+
+**(PM1)** It is suggested to more explicitly articulate what specific weaknesses of prior redundancy-aware or model-based HS–MS fusion approaches (e.g., tensor low-rank methods, MoG-DCN, PSRT, DCTransformer, HMFT, BDT, diffusion/self-learning models) remain unresolved, and why the proposed GLMM-style factorization with LS solving and Transformer refinement addresses these issues in a qualitatively new way rather than as another variant of deep unfolding.  ([ResearchGate][1])
+
+**(PM2)** It is suggested to clarify the meaning of “interpretability” in the context of this model—specifically, whether the learned dictionary atoms and coefficient maps correspond to physically plausible endmembers and abundances (with non-negativity and sum-to-one properties), and if so, to provide qualitative or quantitative evidence (e.g., spectral plots of learned atoms vs. true material signatures) that supports this interpretability claim.
+
+**(PM3)** It is suggested to justify the use of a purely linear mixing model in scenes that are known to exhibit nonlinear mixing, and to discuss whether the deep refinement blocks are expected to model nonlinearities implicitly—and if so, how this differs in practice from existing nonlinear or Transformer-based fusion networks that already claim to handle such effects.
+
+**(PM4)** It is suggested to give a precise definition of the “incomplete information fusion” setting considered (e.g., known vs. unknown sensor responses, simulated vs. real spectral bands) and to explain why the proposed design is particularly suitable for this setting compared with recent blind or implicit-degradation approaches.  ([科学直接][3])
+
+**(PM5)** It is suggested to rethink the use of the term “generalized linear mixed model” given its established meaning in statistics, and either align the formulation more closely with GLMM notions (e.g., explicit random effects) or adopt terminology that better reflects the actual factorization/unmixing structure used here.
+
+#### 3. Questions on Methodology (each question one paragraph)
+
+**(PMe1)** It is suggested to fix and harmonize the definitions of “abundance” and “endmember” throughout the text, ensuring that the mapping between (D) and (\lambda) and their physical meanings is consistent with standard unmixing literature, and to explain how this mapping remains valid when MSI information is injected into the dictionary at the fusion stage.
+
+**(PMe2)** It is suggested to describe in detail how the matrix inverse ((D^T D + \alpha I)^{-1}) is computed and used in practice (per batch, per stage, shared across images, using Cholesky/QR/SVD, etc.), and to analyze the numerical stability and computational overhead of repeatedly solving these systems for realistic values of (m) and (d).
+
+**(PMe3)** It is suggested to clarify what constraints or normalization are applied to the refined dictionary (D^{k+1}) after the MSI-guided Transformer, and whether any mechanisms are in place to ensure that the dictionary remains compatible with an HSI–MSI shared endmember space (e.g., via spectral response matrices or normalization across bands), rather than becoming an arbitrary feature basis that undermines the linear mixing interpretation.
+
+**(PMe4)** It is suggested to justify the choice of bicubic interpolation as the initial HR-HSI and to analyze its influence on LS solving and convergence (e.g., via ablations that replace bicubic with other initialization strategies or with degradation-aware LR–HR reconstruction).
+
+**(PMe5)** It is suggested to discuss why only an L2 reconstruction loss is used despite the strong emphasis on spectral fidelity and physical interpretability, and to consider incorporating or at least ablating SAM-based or physics-inspired regularizers (abundance sparsity, non-negativity, sum-to-one constraints) to evaluate whether they can further improve performance and interpretability.
+
+**(PMe6)** It is suggested to provide a concise but explicit description of the pyramid shuffle-and-reshuffle Transformer blocks as instantiated in this work (number of stages, attention window sizes, feature dimensions, etc.), highlighting any modifications relative to the original PSRT design and explaining why these choices are appropriate for the GLMM context.
+
+**(PMe7)** It is suggested to present a more systematic study of the hyperparameters (m) and (d) (beyond Figs. 8–9), including how they are chosen per dataset, their effect on performance vs. complexity, and whether a single configuration can generalize across all three datasets without retuning.
+
+**(PMe8)** It is suggested to more clearly define the architectural structure corresponding to each ablation variant in Table IV (e.g., what network remains when both “solving” and “fusion” are removed) and to consider stronger baselines with comparable parameter counts so that the contribution of the two-stage GLMM structure is isolated more convincingly.
+
+#### 4. Questions on Experiments (each question one paragraph)
+
+**(PE1)** It is suggested to expand the comparison set to include more recent SOTA methods such as HMFT, DCTransformer, BDT, RSST, HyFusion, DDPM-Fus, KANDiff, and related Transformer/diffusion/self-learning fusion models, or at least provide a thorough discussion and quantitative comparison where possible, in order to substantiate the claim of SOTA performance. ([PMC][4])
+
+**(PE2)** It is suggested to clearly specify the spatial and spectral degradation models used to generate LR-HSI and MSI from HR-HSI for each dataset, and to confirm that these degradations match the assumptions and recommended setups of all baselines, thereby ensuring a fair and reproducible comparison.
+
+**(PE3)** It is suggested to report mean ± standard deviation of PSNR/ERGAS/RASE/SAM across test scenes (and possibly per-scene results or boxplots) rather than only average values, so that the robustness and statistical significance of the improvements over baselines can be better assessed.
+
+**(PE4)** It is suggested to evaluate the method (and possibly some baselines) in a more realistic unsupervised/blind scenario where no HR-HSI ground truth is available, or at least to simulate mismatched sensor responses and unknown degradations, in order to demonstrate how well the approach transfers beyond the idealized supervised setting. ([MDPI][5])
+
+**(PE5)** It is suggested to complement the FLOPs/parameter analysis with actual runtime and memory benchmarks on a common hardware platform and input size, since real-world deployment often depends more directly on runtime and memory than on FLOPs alone.
+
+#### 5. Other Minor Comments (each in a single sentence)
+
+1. It is suggested to correct typographical errors such as “qantitative” and ensure consistent spelling and capitalization throughout the manuscript.
+2. It is suggested to standardize the naming of methods (e.g., “MoG-DCN” instead of “MOG”) and to ensure consistent use of “Ours” in legends and tables.
+3. It is suggested to simplify or shorten some overly long descriptive paragraphs about dataset characteristics and error-map interpretations to improve readability and focus.
+4. It is suggested to check and unify notation for image dimensions and batch indexing across all equations and algorithm listings.
+5. It is suggested to verify that all references are up to date and properly formatted, and to add missing citations to recent HS–MS fusion literature discussed in the text.
+
+[1]: https://www.researchgate.net/publication/368519985_PSRT_Pyramid_Shuffle-and-Reshuffle_Transformer_for_Multispectral_and_Hyperspectral_Image_Fusion?utm_source=chatgpt.com "PSRT: Pyramid Shuffle-and-Reshuffle Transformer for ..."
+[2]: https://www.tandfonline.com/doi/full/10.1080/01431161.2024.2357840?utm_source=chatgpt.com "Hyperspectral-multispectral image fusion using subspace ..."
+[3]: https://www.sciencedirect.com/science/article/pii/S1569843224003091?utm_source=chatgpt.com "An Implicit Transformer-based Fusion Method for ..."
+[4]: https://pmc.ncbi.nlm.nih.gov/articles/PMC9995205/?utm_source=chatgpt.com "HMFT: Hyperspectral and Multispectral Image Fusion ..."
+[5]: https://www.mdpi.com/2072-4292/13/16/3226?utm_source=chatgpt.com "Hyperspectral and Multispectral Image Fusion by Deep ..."
