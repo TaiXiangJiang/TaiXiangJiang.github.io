@@ -111,61 +111,29 @@
       </main>
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/counterapi/dist/counter.browser.min.js"></script>
   <script>
-    function readStorage(key) {
-      try {
-        return window.localStorage.getItem(key);
-      } catch (error) {
-        return null;
+    function getVisitorReferer() {
+      if (window.location.protocol === 'https:' && window.location.hostname === 'taixiangjiang.github.io') {
+        return window.location.origin + window.location.pathname;
       }
+      return 'https://taixiangjiang.github.io/Teaching.html';
     }
 
-    function writeStorage(key, value) {
-      try {
-        window.localStorage.setItem(key, value);
-      } catch (error) {
-        return null;
-      }
-      return value;
-    }
-
-    function resolveCounterValue(result) {
-      if (result && typeof result.value !== 'undefined') {
-        return result.value;
-      }
-      return null;
-    }
-
-    function getCounterValue(counter, counterName) {
-      return counter.get(counterName).then(resolveCounterValue).catch(function () {
-        return null;
-      });
-    }
-
-    function updateUniqueCounter(counter, counterName, storageKey) {
-      if (readStorage(storageKey)) {
-        return getCounterValue(counter, counterName);
-      }
-
-      return counter.up(counterName).then(function (result) {
-        writeStorage(storageKey, '1');
-        return resolveCounterValue(result);
-      }).catch(function () {
-        return null;
-      });
-    }
-
-    function trackSiteVisitorStatistics() {
-      if (typeof Counter !== 'function') {
+    function trackSiteVisitors() {
+      if (!window.fetch) {
         return;
       }
 
-      var counter = new Counter({ workspace: 'taixiangjiang-homepage' });
-      updateUniqueCounter(counter, 'site-total-unique', 'txj-site-total-unique');
+      fetch('https://bsz.saop.cc/api', {
+        method: 'POST',
+        headers: {
+          'x-bsz-referer': getVisitorReferer()
+        },
+        credentials: 'include'
+      }).catch(function () {});
     }
 
-    trackSiteVisitorStatistics();
+    trackSiteVisitors();
   </script>
 </body>
 </html>
