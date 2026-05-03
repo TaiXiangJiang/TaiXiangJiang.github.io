@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhancing the Adversarial Robustness via Manifold Projection | Demo Download</title>
+  <link rel="canonical" href="https://taixiangjiang.github.io/demos/manifold-projection/demo_index.html">
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #66748a;
+      --line: #dbe4ef;
+      --panel: rgba(255, 255, 255, 0.9);
+      --accent: #0f8b8d;
+      --accent-strong: #09686a;
+      --accent-soft: #e7f5f4;
+      --bg-a: #f5f8fb;
+      --bg-b: #eef7f4;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Georgia, 'Times New Roman', serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(15, 139, 141, 0.13), transparent 32rem),
+        linear-gradient(135deg, var(--bg-a), var(--bg-b));
+    }
+    main {
+      width: min(880px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 48px 0;
+    }
+    .panel {
+      border: 1px solid rgba(210, 223, 235, 0.95);
+      border-radius: 22px;
+      background: var(--panel);
+      box-shadow: 0 22px 70px rgba(23, 32, 51, 0.09);
+      overflow: hidden;
+    }
+    .hero { padding: 34px; border-bottom: 1px solid var(--line); }
+    .back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 22px;
+      color: var(--accent);
+      font: 700 13px/1.2 Arial, sans-serif;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    h1 { margin: 0; font-size: clamp(28px, 4.8vw, 44px); line-height: 1.08; }
+    h2 { margin: 0 0 16px; font-size: 22px; }
+    .paper-summary { margin: 14px 0 0; color: var(--muted); font: 15px/1.65 Arial, sans-serif; }
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      padding: 18px 34px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.45);
+    }
+    .metric, .article-card, .bibtex-card {
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: white;
+    }
+    .metric { min-height: 76px; padding: 14px 16px; }
+    .metric span, .field-label {
+      display: block;
+      color: #8a98ac;
+      font: 700 11px/1.2 Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .metric strong { display: block; margin-top: 8px; font-size: 25px; line-height: 1; }
+    .content { display: grid; gap: 22px; padding: 30px 34px 34px; }
+    .article-card, .bibtex-card { padding: 22px; }
+    .paper-title { margin: 0; font: 700 18px/1.35 Arial, sans-serif; }
+    .field { margin-top: 14px; color: var(--muted); font: 14px/1.6 Arial, sans-serif; }
+    .field strong { color: var(--ink); font-weight: 600; }
+    .paper-link {
+      display: inline-flex;
+      margin-top: 16px;
+      padding: 9px 13px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font: 700 13px/1 Arial, sans-serif;
+      text-decoration: none;
+    }
+    .paper-link.is-muted { color: var(--muted); background: #f2f5f8; }
+    .downloads h2, .bibtex-card h2 { font-family: Georgia, 'Times New Roman', serif; }
+    .file-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+      margin-top: 10px;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: white;
+      color: inherit;
+      text-decoration: none;
+      transition: border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+    }
+    .file-row:hover { border-color: #7ec7c4; transform: translateY(-1px); box-shadow: 0 12px 26px rgba(23, 32, 51, 0.08); }
+    .file-row strong { display: block; font: 700 12px/1.2 Arial, sans-serif; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; }
+    .file-row em { display: block; margin-top: 4px; color: var(--ink); font: 14px/1.4 Arial, sans-serif; font-style: normal; overflow-wrap: anywhere; }
+    .file-size {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 0 14px;
+      border-radius: 999px;
+      color: white;
+      background: linear-gradient(135deg, #f97316, #dc2626);
+      box-shadow: 0 10px 18px rgba(220, 38, 38, 0.18);
+      font: 800 12px/1 Arial, sans-serif;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+    .file-size::before { content: "Download "; }
+    .note { margin: 16px 0 0; padding: 13px 15px; border-radius: 12px; background: var(--accent-soft); color: #276866; font: 13px/1.5 Arial, sans-serif; }
+    .bibtex-head { display: flex; justify-content: space-between; gap: 16px; align-items: center; }
+    .copy-button {
+      border: 0;
+      border-radius: 999px;
+      padding: 9px 13px;
+      color: white;
+      background: var(--accent);
+      cursor: pointer;
+      font: 700 12px/1 Arial, sans-serif;
+    }
+    pre {
+      margin: 16px 0 0;
+      padding: 16px;
+      overflow-x: auto;
+      border-radius: 12px;
+      background: #111827;
+      color: #e5edf6;
+      font: 13px/1.55 Consolas, 'Courier New', monospace;
+      white-space: pre;
+    }
+    footer { margin-top: 18px; color: #8a98ac; font: 12px/1.5 Arial, sans-serif; text-align: center; }
+    @media (max-width: 620px) {
+      main { width: min(100% - 20px, 880px); padding: 24px 0; }
+      .hero, .content { padding: 24px; }
+      .meta { grid-template-columns: 1fr; padding: 16px 24px; }
+      .file-row, .bibtex-head { align-items: flex-start; flex-direction: column; }
+      .file-size { align-self: flex-start; }
+    }
+  </style>
+</head>
+<body data-counter-name="demo-manifold-projection">
+  <main>
+    <section class="panel">
+      <div class="hero">
+        <a class="back" href="../../index.html#publications">Back to Publications</a>
+        <h1>Enhancing the Adversarial Robustness via Manifold Projection</h1>
+        <p class="paper-summary">AAAI, 2025.</p>
+      </div>
+      <div class="meta">
+        <div class="metric">
+          <span>Demo Type</span>
+          <strong>PyTorch Demo</strong>
+        </div>
+        <div class="metric">
+          <span>Visitors</span>
+          <strong id="demo-visitor-count">Loading</strong>
+        </div>
+      </div>
+      <div class="content">
+        <section class="article-card" aria-labelledby="paper-info-title">
+          <span class="field-label">Article Info</span>
+          <h2 id="paper-info-title" class="paper-title">Enhancing the Adversarial Robustness via Manifold Projection</h2>
+          <p class="field"><strong>Authors:</strong> Zhiting Li, Shibai Yin, Tai-Xiang Jiang*, Yexun Hu, Jia-Mian Wu, Guowei Yang, Guisong Liu</p>
+          <p class="field"><strong>Venue:</strong> AAAI, 2025.</p>
+          <a class="paper-link" href="../../paper/2025/enhancing-adversarial-robustness-manifold-projection.pdf" target="_blank" rel="noopener">Open PDF</a>
+        </section>
+        <section class="downloads" aria-labelledby="download-title">
+          <h2 id="download-title">Download Files</h2>
+          <a class="file-row" href="../Demo of Enhancing_the_Adversarial_Robustness_via_Manifold_Projection.zip" download>
+            <span>
+              <strong>Archive</strong>
+              <em>Demo of Enhancing_the_Adversarial_Robustness_via_Manifold_Projection.zip</em>
+            </span>
+            <span class="file-size">80.9 KB</span>
+          </a>
+        </section>
+        <section class="bibtex-card" aria-labelledby="bibtex-title">
+          <div class="bibtex-head">
+            <h2 id="bibtex-title">BibTeX</h2>
+            <button class="copy-button" type="button" id="copy-bibtex">Copy BibTeX</button>
+          </div>
+          <pre id="bibtex-code">@inproceedings{li2025enhancing,
+  title={Enhancing the Adversarial Robustness via Manifold Projection},
+  author={Li, Zhiting and Yin, Shibai and Jiang, Tai-Xiang and Hu, Yexun and Wu, Jia-Mian and Yang, Guowei and Liu, Guisong},
+  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume={39},
+  number={1},
+  pages={451--459},
+  year={2025}
+}</pre>
+        </section>
+      </div>
+    </section>
+    <footer>Each demo page keeps its own visitor counter.</footer>
+  </main>
+  <script>
+    (function () {
+      var counterName = document.body.getAttribute('data-counter-name');
+      var countElement = document.getElementById('demo-visitor-count');
+      var copyButton = document.getElementById('copy-bibtex');
+      var bibtexCode = document.getElementById('bibtex-code');
+      var storageKey = 'txj-' + counterName + '-visited';
+      var namespace = 'taixiangjiang-demo-downloads';
+
+      function formatCount(value) {
+        var number = Number(value);
+        return Number.isFinite(number) ? number.toLocaleString() : 'Unavailable';
+      }
+
+      function hasVisited() {
+        try { return window.localStorage.getItem(storageKey) === '1'; }
+        catch (error) { return false; }
+      }
+
+      function markVisited() {
+        try { window.localStorage.setItem(storageKey, '1'); }
+        catch (error) {}
+      }
+
+      function render(value) {
+        if (countElement) {
+          countElement.textContent = formatCount(value);
+        }
+      }
+
+      function fallbackCopy(text) {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.setAttribute('readonly', '');
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+      }
+
+      if (copyButton && bibtexCode) {
+        copyButton.addEventListener('click', function () {
+          var text = bibtexCode.textContent || '';
+          var copied = window.navigator && navigator.clipboard
+            ? navigator.clipboard.writeText(text)
+            : Promise.resolve().then(function () { fallbackCopy(text); });
+
+          copied.then(function () {
+            copyButton.textContent = 'Copied';
+            window.setTimeout(function () { copyButton.textContent = 'Copy BibTeX'; }, 1400);
+          }).catch(function () {
+            fallbackCopy(text);
+            copyButton.textContent = 'Copied';
+            window.setTimeout(function () { copyButton.textContent = 'Copy BibTeX'; }, 1400);
+          });
+        });
+      }
+
+      if (!window.fetch || !counterName) {
+        render(null);
+        return;
+      }
+
+      var shouldIncrement = !hasVisited();
+      var endpoint = 'https://api.counterapi.dev/v1/' + namespace + '/' + encodeURIComponent(counterName);
+      var url = shouldIncrement ? endpoint + '/up' : endpoint + '/?readOnly=true';
+
+      fetch(url)
+        .then(function (response) {
+          if (!response.ok) {
+            throw new Error('Counter request failed.');
+          }
+          return response.json();
+        })
+        .then(function (result) {
+          if (shouldIncrement) {
+            markVisited();
+          }
+          render(result && typeof result.count !== 'undefined' ? result.count : null);
+        })
+        .catch(function () { render(null); });
+    })();
+  </script>
+</body>
+</html>
